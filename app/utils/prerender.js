@@ -5,8 +5,8 @@ const Iso = require('iso');
 const getAppWithContext = require('./getAppWithContext');
 const html = require('../index.html');
 
-module.exports = function (initData, scriptUrl, styleUrl, callback) {
-  const node = React.createElement(getAppWithContext(initData));
+const prerender = (initData, scriptUrl, styleUrl, callback) => {
+  const Component = React.createElement(getAppWithContext(initData));
 
   // format the full page
   callback(null, html
@@ -15,10 +15,12 @@ module.exports = function (initData, scriptUrl, styleUrl, callback) {
     .replace(
       'CONTENT',
       Iso.render(
-        React.renderToStaticMarkup(node),
+        React.renderToStaticMarkup(Component),
         initData,
         { react: true }
       )
     )
   );
 };
+
+module.exports = prerender;

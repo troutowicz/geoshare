@@ -35,8 +35,8 @@ describe('ListItem component', function () {
       document.body
     );
 
-    const listItemNode = TestUtils.findRenderedComponentWithType(component, ListItem).getDOMNode();
-    TestUtils.Simulate.click(listItemNode);
+    const listItem = TestUtils.findRenderedComponentWithType(component, ListItem);
+    TestUtils.Simulate.click(React.findDOMNode(listItem));
 
     assert.ok(onClick.calledOnce, 'click handler called');
   });

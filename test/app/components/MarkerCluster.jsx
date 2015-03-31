@@ -27,7 +27,7 @@ describe('MarkerCluster component', function () {
       document.body
     );
 
-    const cluster = TestUtils.findRenderedComponentWithType(component, MarkerCluster).getLeafletElement();
+    const cluster = TestUtils.findRenderedComponentWithType(component, MarkerCluster).leafletElement;
     assert.lengthOf(cluster.getLayers(), 2);
   });
   /*

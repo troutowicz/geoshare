@@ -11,21 +11,23 @@ const GithubButton = require('../../../app/components/GithubButton');
 
 describe('TopBar component', function () {
   before(function() {
-    this.TopBar = React.createClass({
-      childContextTypes: {
-        tag: React.PropTypes.string.isRequired,
-        loggedIn: React.PropTypes.bool.isRequired,
-        repoUrl: React.PropTypes.string.isRequired
-      },
-
-      getChildContext: function () {
+    class TopBarWithContext extends React.Component {
+      getChildContext() {
         return { tag: 'tag', loggedIn: false, repoUrl: '' };
-      },
+      }
 
-      render: function () {
+      render() {
         return <TopBar itemCount={this.props.itemCount} />;
       }
-    });
+    }
+
+    TopBarWithContext.childContextTypes = {
+      tag: React.PropTypes.string.isRequired,
+      loggedIn: React.PropTypes.bool.isRequired,
+      repoUrl: React.PropTypes.string.isRequired
+    };
+
+    this.TopBar = TopBarWithContext;
   });
 
   it('should display counter when itemCount property > 0', function () {

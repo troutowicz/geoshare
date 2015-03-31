@@ -5,19 +5,7 @@ const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 const ListItem = require('./ListItem');
 
-module.exports = React.createClass({
-  propTypes: {
-    itemData: React.PropTypes.array,
-    onClick: React.PropTypes.func
-  },
-
-  getDefaultProps() {
-    return {
-      itemData: [],
-      onClick() {}
-    };
-  },
-
+class List extends React.Component {
   render() {
     return (
       <ul className='mui-list'>
@@ -37,4 +25,16 @@ module.exports = React.createClass({
       </ul>
     );
   }
-});
+}
+
+List.propTypes = {
+  itemData: React.PropTypes.array,
+  onClick: React.PropTypes.func
+};
+
+List.defaultProps = {
+  itemData: [],
+  onClick() {}
+};
+
+module.exports = List;

@@ -3,14 +3,7 @@
 const React = require('react');
 const { Paper } = require('material-ui');
 
-module.exports = React.createClass({
-  propTypes: {
-    icon: React.PropTypes.string,
-    title: React.PropTypes.string,
-    description: React.PropTypes.string,
-    onClick: React.PropTypes.func
-  },
-
+class ListItem extends React.Component {
   render() {
     return (
       <li className='mui-list-item' onClick={this.props.onClick} >
@@ -27,4 +20,18 @@ module.exports = React.createClass({
       </li>
     );
   }
-});
+}
+
+ListItem.propTypes = {
+  icon: React.PropTypes.string,
+  title: React.PropTypes.string,
+  description: React.PropTypes.string,
+  onClick: React.PropTypes.func
+};
+
+ListItem.defaultProps = {
+  title: '',
+  description: ''
+};
+
+module.exports = ListItem;

@@ -3,11 +3,7 @@
 const React = require('react');
 const { IconButton } = require('material-ui');
 
-module.exports = React.createClass ({
-  propTypes: {
-    repoUrl: React.PropTypes.string
-  },
-
+class GithubButton extends React.Component {
   render() {
     return (
       <IconButton
@@ -16,4 +12,10 @@ module.exports = React.createClass ({
         linkButton={true} />
     );
   }
-});
+}
+
+GithubButton.propTypes = {
+  repoUrl: React.PropTypes.string
+};
+
+module.exports = GithubButton;

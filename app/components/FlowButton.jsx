@@ -3,19 +3,7 @@
 const React = require('react');
 const { FlatButton } = require('material-ui');
 
-module.exports = React.createClass ({
-  propTypes: {
-    label: React.PropTypes.string,
-    onClick: React.PropTypes.func
-  },
-
-  getDefaultProps() {
-    return {
-      label: 'Pause',
-      onClick() {}
-    };
-  },
-
+class FlowButton extends React.Component {
   render() {
     return (
       <FlatButton
@@ -23,4 +11,16 @@ module.exports = React.createClass ({
         onClick={this.props.onClick} />
     );
   }
-});
+}
+
+FlowButton.propTypes = {
+  label: React.PropTypes.string,
+  onClick: React.PropTypes.func
+};
+
+FlowButton.defaultProps = {
+  label: 'Pause',
+  onClick() {}
+};
+
+module.exports = FlowButton;
