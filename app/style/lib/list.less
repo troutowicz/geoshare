@@ -1,0 +1,57 @@
+.mui-list {
+  list-style-type: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  * { .ease-out(); }
+
+  li.mui-list-item {
+    cursor: pointer;
+    background-color: fade(@menu-item-hover-color, 0%);
+    height: 72px;
+
+    &:hover {
+      background-color: @menu-item-hover-color;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    margin-left: 16px;
+    margin-top: 19px;
+
+    .mui-paper {
+      overflow: hidden;
+      height: 40px;
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+
+  .content {
+    position: relative;
+    padding-left: 72px;
+    padding-right: 16px;
+
+    .title {
+      padding-top: 20px;
+      font-weight: 500;
+      font-size: 1.2em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .description {
+      margin-top: -4px;
+      font-size: 0.75em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}

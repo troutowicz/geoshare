@@ -1,0 +1,74 @@
+{
+  "name": "geoshare",
+  "version": "1.0.0",
+  "description": "View tag filtered instagram images in real time",
+  "engines": {
+    "iojs": "1.5.1"
+  },
+  "main": "app/app.js",
+  "scripts": {
+    "dev-server": "webpack --config config/webpack/prerender.config.js & webpack-dev-server --config config/webpack/devServer.config.js --progress --colors --hot --inline",
+    "dev": "iojs --harmony_object_literals --harmony_arrow_functions config/serverDev",
+    "build": "webpack --config config/webpack/production.config.js --progress --profile --colors",
+    "prod": "iojs --harmony_object_literals --harmony_arrow_functions config/serverProd",
+    "test-react": "mochify babel/polyfill ./test/app/components/* --reporter spec --transform babelify --extension .jsx",
+    "test-other": "mocha ./test/lib ./test/app/actions ./test/app/stores --compilers js:babel/register",
+    "test": "npm run test-react && npm run test-other"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/troutowicz/geoshare.git"
+  },
+  "author": "Tim Routowicz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/troutowicz/geoshare/issues"
+  },
+  "homepage": "https://github.com/troutowicz/geoshare",
+  "dependencies": {
+    "alt": "^0.14.3",
+    "babel-core": "^4.7.8",
+    "babel-loader": "^4.1.0",
+    "config": "^1.12.0",
+    "css-loader": "^0.9.0",
+    "extract-text-webpack-plugin": "^0.5.0",
+    "good": "^5.1.2",
+    "good-console": "^4.1.0",
+    "hapi-auth-cookie": "^2.0.0",
+    "hapi-shutdown": "^0.1.1",
+    "html-loader": "^0.2.2",
+    "instagram-node": "^0.5.6",
+    "iso": "^4.0.2",
+    "json5": "^0.4.0",
+    "leaflet": "^0.7.3",
+    "leaflet.markercluster": "Leaflet/Leaflet.markercluster#e63f39e5fc5488c9381d97dee72bea0677095cd1",
+    "less": "^2.4.0",
+    "less-loader": "^2.1.0",
+    "material-ui": "^0.7.1",
+    "null-loader": "^0.1.0",
+    "object.assign": "^1.1.1",
+    "react": "^0.12.2",
+    "react-hot-loader": "^1.2.3",
+    "react-leaflet": "^0.3.0",
+    "react-tap-event-plugin": "^0.1.4",
+    "redis": "^0.12.1",
+    "socket.io": "^1.3.5",
+    "socket.io-client": "^1.3.5",
+    "style-loader": "^0.9.0",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.7.3"
+  },
+  "devDependencies": {
+    "babel": "^4.7.3",
+    "babelify": "^5.0.4",
+    "chai": "^2.1.1",
+    "mocha": "^2.2.1",
+    "mochify": "^2.6.0",
+    "phantomjs": "^1.9.16",
+    "react-tools": "^0.12.2",
+    "reactify": "^1.0.0",
+    "rewire": "^2.3.1",
+    "sinon": "^1.14.1",
+    "webpack-dev-server": "^1.8.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  Web: {
+    host: 'localhost',
+    port: 8080,
+    webpack_port: 2992,
+    cookie: 'secret'
+  },
+  Instagram: {
+    client_id: '',
+    client_secret: '',
+    redirect_uri: '',
+    sub_uri: '',
+    tag: 'tag',
+    verify_token: ''
+  },
+  Github: {
+    repoUrl: ''
+  }
+}

@@ -1,0 +1,18 @@
+{
+    // Enforcing
+    "curly"         : true,     // Require {} for every new block or scope
+    "eqeqeq"        : true,     // Require triple equals (===) for comparison
+    "indent"        : 2,        // Number of spaces to use for indentation
+    "noempty"       : true,     // Prohibit use of empty blocks
+    "quotmark"      : "single", // Quotation mark consistency
+    "undef"         : true,     // Require all non-global variables to be declared (prevents global leaks)
+    "unused"        : true,     // Require all defined variables be used
+    "strict"        : true,     // Requires all functions run in ES5 Strict Mode
+
+    // Relaxing
+    "esnext"        : true,     // Allow ES.next (ES6) syntax (ex: `const`)
+    "multistr"      : true,    // Tolerate multi-line strings
+
+    // Environments
+    "node"          : true
+}
