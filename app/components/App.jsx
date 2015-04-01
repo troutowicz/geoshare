@@ -18,40 +18,38 @@ new InjectTapEventPlugin();
 
 require('../style/components/app.less');
 
-const App = React.createClass({
-  statics: {
-    getStores() {
-      return [AppStore];
-    },
+class App extends React.Component {
+  static getStores() {
+    return [AppStore];
+  }
 
-    getStateFromStores() {
-      return {
-        newImageData: AppStore.getState().newImageData,
-        imageData: AppStore.getState().imageData,
-        markers: AppStore.getState().markers,
-        focusMarker: AppStore.getState().focusMarker,
-        flow: AppStore.getState().flow,
-        timeout: AppStore.getState().timeout
-      };
-    }
-  },
+  static getStateFromStores() {
+    return {
+      newImageData: AppStore.getState().newImageData,
+      imageData: AppStore.getState().imageData,
+      markers: AppStore.getState().markers,
+      focusMarker: AppStore.getState().focusMarker,
+      flow: AppStore.getState().flow,
+      timeout: AppStore.getState().timeout
+    };
+  }
 
   componentDidMount() {
     socket.on('data:add', this._onDataAdd);
     socket.on('data:timeout', this._onDataTimeout);
-  },
+  }
 
   _onDataAdd(data) {
     AppActions.data(data);
-  },
+  }
 
   _onDataTimeout(data) {
     AppActions.timeout(data);
-  },
+  }
 
   _onListItemClick(item) {
     AppActions.focusMarker(item);
-  },
+  }
 
   render() {
     // cant be executing client side js on prerender
@@ -91,6 +89,6 @@ const App = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = connectToStores(App);

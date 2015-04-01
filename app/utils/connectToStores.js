@@ -15,10 +15,12 @@ const assign = require('object.assign');
 const connectToStores = (Component) => {
   const stores = Component.getStores();
 
-  const StoreConnection = React.createClass({
-    getInitialState() {
-      return Component.getStateFromStores(this.props);
-    },
+  class StoreConnection extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.state = Component.getStateFromStores(props);
+    }
 
     componentWillMount() {
       if (this.props.altStores) {
@@ -27,24 +29,24 @@ const connectToStores = (Component) => {
         // force state update this render cycle
         this.setState(Component.getStateFromStores(this.props));
       }
-    },
+    }
 
     componentDidMount() {
-      stores.forEach(store => store.listen(this._onChange));
-    },
+      stores.forEach(store => store.listen(this._onChange.bind(this)));
+    }
 
     componentWillUnmount() {
-      stores.forEach(store => store.unlisten(this._onChange));
-    },
+      stores.forEach(store => store.unlisten(this._onChange.bind(this)));
+    }
 
     _onChange() {
       this.setState(Component.getStateFromStores(this.props));
-    },
+    }
 
     render() {
       return React.createElement(Component, assign({}, this.props, this.state));
     }
-  });
+  }
 
   return StoreConnection;
 };

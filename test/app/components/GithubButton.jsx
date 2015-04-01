@@ -16,8 +16,8 @@ describe('GithubButton component', function () {
       document.body
     );
 
-    const buttonNode = TestUtils.findRenderedComponentWithType(component, GithubButton).getDOMNode();
-    const href = buttonNode.href;
+    const button = TestUtils.findRenderedComponentWithType(component, GithubButton);
+    const href = React.findDOMNode(button).href;
 
     assert.equal(href, repoUrl, 'href set');
   });

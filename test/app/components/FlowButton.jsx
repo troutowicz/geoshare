@@ -17,8 +17,8 @@ describe('FlowButton component', function () {
       document.body
     );
 
-    const buttonNode = TestUtils.findRenderedComponentWithType(component, FlowButton).getDOMNode();
-    const value = buttonNode.getElementsByTagName('span')[0].innerHTML;
+    const button = TestUtils.findRenderedComponentWithType(component, FlowButton);
+    const value = React.findDOMNode(button).getElementsByTagName('span')[0].innerHTML;
 
     assert.equal(value, label, 'label set');
   });
@@ -31,8 +31,8 @@ describe('FlowButton component', function () {
       document.body
     );
 
-    const buttonNode = TestUtils.findRenderedComponentWithType(component, FlowButton).getDOMNode();
-    TestUtils.Simulate.click(buttonNode);
+    const button = TestUtils.findRenderedComponentWithType(component, FlowButton);
+    TestUtils.Simulate.click(React.findDOMNode(button));
 
     assert.ok(onClick.calledOnce, 'click handler called');
   });

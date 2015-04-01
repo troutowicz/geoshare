@@ -8,30 +8,14 @@ const GithubButton = require('./GithubButton');
 
 const AppActions = require('../actions/AppActions');
 
-module.exports = React.createClass({
-  contextTypes: {
-    tag: React.PropTypes.string.isRequired,
-    loggedIn: React.PropTypes.bool.isRequired,
-    repoUrl: React.PropTypes.string.isRequired
-  },
+class TopBar extends React.Component {
+  _onLoginClick() { window.location.href = '/auth'; }
 
-  propTypes: {
-    itemCount: React.PropTypes.number
-  },
-
-  getDefaultProps() {
-    return {
-      itemCount: 0
-    };
-  },
-
-  _onLoginClick() { window.location.href = '/auth'; },
-
-  _onLogoutClick() { window.location.href = '/logout'; },
+  _onLogoutClick() { window.location.href = '/logout'; }
 
   _onFlowClick() {
     AppActions.flow(this.props.flow);
-  },
+  }
 
   render() {
     let counter = '';
@@ -56,7 +40,7 @@ module.exports = React.createClass({
           {'#' + this.context.tag + counter}
         </div>
         <ToolbarGroup key={1} float='right'>
-          <FlowButton label={this.props.flow} onClick={this._onFlowClick} />
+          <FlowButton label={this.props.flow} onClick={this._onFlowClick.bind(this)} />
           <span className='mui-toolbar-separator'>&nbsp;</span>
           <AuthButton label={authLabel} onClick={authClick} />
           <GithubButton repoUrl={this.context.repoUrl} />
@@ -64,4 +48,20 @@ module.exports = React.createClass({
       </Toolbar>
     );
   }
-});
+}
+
+TopBar.contextTypes = {
+  tag: React.PropTypes.string.isRequired,
+  loggedIn: React.PropTypes.bool.isRequired,
+  repoUrl: React.PropTypes.string.isRequired
+};
+
+TopBar.propTypes = {
+  itemCount: React.PropTypes.number
+};
+
+TopBar.defaultProps = {
+  itemCount: 0
+};
+
+module.exports = TopBar;
