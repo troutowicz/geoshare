@@ -1,15 +1,19 @@
 'use strict';
 
 const React = require('react/addons');
-const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
+const ReactCSSTransitionGroup = require('./ReactCSSTransitionGroup');
 const ListItem = require('./ListItem');
 
 class List extends React.Component {
   render() {
     return (
       <ul className='mui-list'>
-        <ReactCSSTransitionGroup transitionName='list-item'>
+        <ReactCSSTransitionGroup
+          transitionName='list-item'
+          enterTimeout={1000}
+          leaveTimeout={0}
+        >
           {this.props.itemData.map((obj) => {
             return (
               <ListItem
