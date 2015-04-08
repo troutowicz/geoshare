@@ -12,11 +12,9 @@ describe('FlowButton component', function () {
   it('should set value using label property', function () {
     const label = 'Foo';
 
-    const component = React.render(
-      <FlowButton label={label} />,
-      document.body
+    const component = TestUtils.renderIntoDocument(
+      <FlowButton label={label} />
     );
-
     const button = TestUtils.findRenderedComponentWithType(component, FlowButton);
     const value = React.findDOMNode(button).getElementsByTagName('span')[0].innerHTML;
 
@@ -26,14 +24,12 @@ describe('FlowButton component', function () {
   it('should call onClick property', function () {
     const onClick = sinon.spy();
 
-    const component = React.render(
-      <FlowButton onClick={onClick} />,
-      document.body
+    const component = TestUtils.renderIntoDocument(
+      <FlowButton onClick={onClick} />
     );
-
     const button = TestUtils.findRenderedComponentWithType(component, FlowButton);
-    TestUtils.Simulate.click(React.findDOMNode(button));
 
+    TestUtils.Simulate.click(React.findDOMNode(button));
     assert.ok(onClick.calledOnce, 'click handler called');
   });
 });

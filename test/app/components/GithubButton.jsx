@@ -11,11 +11,9 @@ describe('GithubButton component', function () {
   it('should set href using repoUrl property', function() {
     const repoUrl = 'https://github.com/troutowicz/node-geoshare';
 
-    const component = React.render(
-      <GithubButton repoUrl={repoUrl} />,
-      document.body
+    const component = TestUtils.renderIntoDocument(
+      <GithubButton repoUrl={repoUrl} />
     );
-
     const button = TestUtils.findRenderedComponentWithType(component, GithubButton);
     const href = React.findDOMNode(button).href;
 
