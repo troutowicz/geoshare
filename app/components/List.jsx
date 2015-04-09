@@ -2,7 +2,7 @@
 
 const React = require('react/addons');
 
-const ReactCSSTransitionGroup = require('./ReactCSSTransitionGroup');
+const ReactCSSTransitionGroup = require('./TimeoutTransitionGroup');
 const ListItem = require('./ListItem');
 
 class List extends React.Component {
