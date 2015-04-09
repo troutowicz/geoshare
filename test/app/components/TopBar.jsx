@@ -31,9 +31,8 @@ describe('TopBar component', function () {
   });
 
   it('should display counter when itemCount property > 0', function () {
-    const component = React.render(
-      <this.TopBar itemCount={1} />,
-      document.body
+    const component = TestUtils.renderIntoDocument(
+      <this.TopBar itemCount={1} />
     );
     const counter = TestUtils.findRenderedDOMComponentWithClass(component, 'hashtag');
 
@@ -41,9 +40,8 @@ describe('TopBar component', function () {
   });
 
   it('should not display counter when itemCount property == 0', function () {
-    const component = React.render(
-      <this.TopBar />,
-      document.body
+    const component = TestUtils.renderIntoDocument(
+      <this.TopBar />
     );
     const counter = TestUtils.findRenderedDOMComponentWithClass(component, 'hashtag');
 
@@ -51,9 +49,8 @@ describe('TopBar component', function () {
   });
 
   it('should embed children components', function () {
-    const component = React.render(
-      <this.TopBar />,
-      document.body
+    const component = TestUtils.renderIntoDocument(
+      <this.TopBar />
     );
 
     assert.ok(TestUtils.findRenderedComponentWithType(component, FlowButton), 'has flow button');

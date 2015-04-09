@@ -28,12 +28,12 @@ describe('List component', function () {
         }
       }
     ];
-    const component = React.render(
-      <List itemData={data} />,
-      document.body
-    );
 
+    const component = TestUtils.renderIntoDocument(
+      <List itemData={data} />
+    );
     const numListItems = TestUtils.scryRenderedComponentsWithType(component, ListItem).length;
+
     assert.equal(numListItems, data.length, 'correct number of list items');
   });
 });

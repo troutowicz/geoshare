@@ -26,10 +26,11 @@ describe('MarkerCluster component', function () {
       <MyMap newMarkerData={data} />,
       document.body
     );
-
     const cluster = TestUtils.findRenderedComponentWithType(component, MarkerCluster).leafletElement;
-    assert.lengthOf(cluster.getLayers(), 2);
+
+    assert.lengthOf(cluster.getLayers(), Object.keys(data).length);
   });
+
   /*
   it('should focus on a marker using focusMarker property', function () {
     const data = {
