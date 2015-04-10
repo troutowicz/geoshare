@@ -2,7 +2,6 @@
 
 const React = require('react');
 const alt = require('../alt');
-const assign = require('object.assign');
 
 /**
  * 'Higher Order Component' that controls the props of the wrapped
@@ -27,7 +26,7 @@ const connectToStores = (Component) => {
         alt.bootstrap(JSON.stringify(this.props.altStores));
 
         // force state update this render cycle
-        this.setState(Component.getStateFromStores(this.props));
+        this.setState(Component.getStateFromStores());
       }
     }
 
@@ -40,11 +39,11 @@ const connectToStores = (Component) => {
     }
 
     _onChange() {
-      this.setState(Component.getStateFromStores(this.props));
+      this.setState(Component.getStateFromStores());
     }
 
     render() {
-      return React.createElement(Component, assign({}, this.props, this.state));
+      return React.createElement(Component, Object.assign({}, this.props, this.state));
     }
   }
 

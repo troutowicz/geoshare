@@ -1,5 +1,7 @@
 'use strict';
 
+require('babel/polyfill');
+
 const React = require('react');
 const Iso = require('iso');
 const getAppWithContext = require('./utils/getAppWithContext');

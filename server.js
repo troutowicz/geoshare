@@ -1,5 +1,7 @@
 'use strict';
 
+require('babel/polyfill');
+
 module.exports = (options) => {
   const Hapi = require('hapi');
   const SocketIO = require('socket.io');

@@ -3,7 +3,6 @@
 const React = require('react');
 const Leaflet = require('leaflet');
 const MapLayer = require('react-leaflet/lib/MapLayer');
-const assign = require('object.assign');
 require('leaflet.markercluster');
 
 const AppActions = require('../actions/AppActions');
@@ -20,7 +19,7 @@ class MarkerCluster extends MapLayer {
 
     // add markers to cluster layer
     if (nextProps.newMarkerData.length > 0) {
-      let markers = assign({}, this.props.markers);
+      let markers = Object.assign({}, this.props.markers);
       let newMarkers = [];
 
       nextProps.newMarkerData.forEach((obj) => {
