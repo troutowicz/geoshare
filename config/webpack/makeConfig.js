@@ -34,8 +34,8 @@ module.exports = function (options) {
   };
 
   var stylesheetLoaders = {
-    css: 'css-loader',
-    less: 'css-loader!less-loader'
+    css: 'css-loader!autoprefixer-loader',
+    less: 'css-loader!autoprefixer-loader!less-loader'
   };
 
   var additionalLoaders = [
