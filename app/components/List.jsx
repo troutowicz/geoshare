@@ -18,7 +18,7 @@ class List extends React.Component {
             return (
               <ListItem
                 icon={obj.user.profile_picture}
-                title={obj.user.full_name}
+                title={obj.user.full_name.trim() || '-'}
                 description={obj.user.username}
                 onClick={this.props.onClick.bind(null, obj)}
                 key={obj.id}
