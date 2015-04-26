@@ -6,7 +6,7 @@ const AppStore = require('../../../app/stores/AppStore');
 
 describe('AppStore', function () {
   before(function () {
-    this.UnwrappedStore = AppStore[Object.getOwnPropertySymbols(AppStore)[2]];
+    this.UnwrappedStore = AppStore[Object.getOwnPropertySymbols(AppStore)[3]];
     this.defaultState = AppStore.getState();
   });
 
