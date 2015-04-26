@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/troutowicz/geoshare.svg)](https://travis-ci.org/troutowicz/geoshare)
+
 # geoshare
 > View tag filtered instagram images in real time
 
