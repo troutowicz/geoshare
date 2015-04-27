@@ -16,7 +16,7 @@ class TopBar extends React.Component {
   }
 
   render() {
-    let counter = '';
+    let hashtag = `#${this.context.tag}`;
     let authClick = this._onLoginClick;
     let authLabel = 'Login';
 
@@ -26,7 +26,7 @@ class TopBar extends React.Component {
     }
 
     if (this.props.itemCount > 0) {
-      counter = ' (' + this.props.itemCount + ')';
+      hashtag = `${hashtag} (${this.props.itemCount})`;
     }
 
     return (
@@ -35,7 +35,7 @@ class TopBar extends React.Component {
           <div className='mui-font-style-headline'>GeoShare</div>
         </ToolbarGroup>
         <div className='hashtag mui-font-style-subhead-1'>
-          {'#' + this.context.tag + counter}
+          {hashtag}
         </div>
         <ToolbarGroup key={1} float='right'>
           <FlowButton label={this.props.flow} onClick={this._onFlowClick.bind(this)} />

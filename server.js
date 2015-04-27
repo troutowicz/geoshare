@@ -105,7 +105,7 @@ module.exports = (options) => {
   });
 
   server.start(() => {
-    server.log('info', 'Server running at: ' + server.info.uri);
+    server.log('info', `Server running at: ${server.info.uri}`);
 
     const io = SocketIO.listen(server.listener);
     server.app.options = options;
@@ -153,10 +153,10 @@ module.exports = (options) => {
           latlng: [Math.random() * 180 - 90, Math.random() * 360 - 180],
           user: {
             profile_picture: '/public/user.jpg',
-            full_name: 'User ' + counter,
-            username: 'user' + counter
+            full_name: `User ${counter}`,
+            username: `user ${counter}`
           },
-          marker_popup: '<div>description ' + counter + '</div>'
+          marker_popup: `<div>description ${counter}</div>`
         };
 
         io.to('realtime').emit('data:add', [data], true);

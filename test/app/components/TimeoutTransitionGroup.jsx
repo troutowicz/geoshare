@@ -74,7 +74,7 @@ describe('TimeoutTransitionGroup component', function () {
     assert.equal(child.className, this.enterCSS);
 
     this.clock.tick(17);
-    assert.equal(child.className, this.enterCSS + ' ' + this.enterActiveCSS);
+    assert.equal(child.className, `${this.enterCSS} ${this.enterActiveCSS}`);
 
     this.clock.tick(1);
     assert.equal(child.className, '');
@@ -95,7 +95,7 @@ describe('TimeoutTransitionGroup component', function () {
     assert.equal(child.className, this.leaveCSS);
 
     this.clock.tick(17);
-    assert.equal(child.className, this.leaveCSS + ' ' + this.leaveActiveCSS);
+    assert.equal(child.className, `${this.leaveCSS} ${this.leaveActiveCSS}`);
 
     this.clock.tick(1);
     assert.equal(child.className, '');

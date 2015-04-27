@@ -89,7 +89,7 @@ function addClass(element, className) {
   if (element.classList) {
     element.classList.add(className);
   } else if (!hasClass(element, className)) {
-    element.className = element.className + ' ' + className;
+    element.className = `${element.className} ${className}`;
   }
 
   return element;
@@ -100,8 +100,8 @@ function removeClass(element, className) {
     if (element.classList) {
       element.classList.remove(className);
     } else {
-      element.className = (' ' + element.className + ' ')
-        .replace(' ' + className + ' ', ' ').trim();
+      element.className = (` ${element.className} `)
+        .replace(` ${className} `, ' ').trim();
     }
   }
 
@@ -112,7 +112,7 @@ function hasClass(element, className) {
   if (element.classList) {
     return element.classList.contains(className);
   } else {
-    return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
+    return (` ${element.className} `).indexOf(` ${className} `) > -1;
   }
 }
 
@@ -127,7 +127,7 @@ class TimeoutTransitionGroupChild extends React.Component {
 
   _transition(animationType, finishCallback) {
     let node = React.findDOMNode(this);
-    const className = this.props.name + '-' + animationType;
+    const className = `${this.props.name}-${animationType}`;
     const activeClassName = className + '-active';
 
     const endListener = () => {
