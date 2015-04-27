@@ -1,12 +1,10 @@
 'use strict';
 
 const React = require('react');
-const { Toolbar, ToolbarGroup } = require('material-ui');
-const FlowButton = require('./FlowButton');
 const AuthButton = require('./AuthButton');
+const FlowButton = require('./FlowButton');
 const GithubButton = require('./GithubButton');
-
-const AppActions = require('../actions/AppActions');
+const { Toolbar, ToolbarGroup } = require('material-ui');
 
 class TopBar extends React.Component {
   _onLoginClick() { window.location.href = '/auth'; }
@@ -14,7 +12,7 @@ class TopBar extends React.Component {
   _onLogoutClick() { window.location.href = '/logout'; }
 
   _onFlowClick() {
-    AppActions.flow(this.props.flow);
+    this.props.updateFlow(this.props.flow);
   }
 
   render() {
@@ -51,13 +49,15 @@ class TopBar extends React.Component {
 }
 
 TopBar.contextTypes = {
-  tag: React.PropTypes.string.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
-  repoUrl: React.PropTypes.string.isRequired
+  repoUrl: React.PropTypes.string.isRequired,
+  tag: React.PropTypes.string.isRequired
 };
 
 TopBar.propTypes = {
-  itemCount: React.PropTypes.number
+  flow: React.PropTypes.string,
+  itemCount: React.PropTypes.number,
+  updateFlow: React.PropTypes.func
 };
 
 TopBar.defaultProps = {

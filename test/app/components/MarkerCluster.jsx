@@ -23,7 +23,7 @@ describe('MarkerCluster component', function () {
     ];
 
     const component = React.render(
-      <MyMap newMarkerData={data} />,
+      <MyMap newMarkerData={data} updateMarkers={() => {}}/>,
       document.body
     );
     const cluster = TestUtils.findRenderedComponentWithType(component, MarkerCluster).leafletElement;

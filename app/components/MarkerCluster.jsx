@@ -5,8 +5,6 @@ const Leaflet = require('leaflet');
 const MapLayer = require('react-leaflet/lib/MapLayer');
 require('leaflet.markercluster');
 
-const AppActions = require('../actions/AppActions');
-
 class MarkerCluster extends MapLayer {
   componentWillMount() {
     super.componentWillMount();
@@ -34,7 +32,7 @@ class MarkerCluster extends MapLayer {
       this.leafletElement.addLayers(newMarkers);
 
       setTimeout(() => {
-        AppActions.updateMarkers(markers);
+        this.props.updateMarkers(markers);
       }, 0);
     }
 
@@ -59,9 +57,10 @@ class MarkerCluster extends MapLayer {
 }
 
 MarkerCluster.propTypes = {
+  focusMarker: React.PropTypes.object,
   markers: React.PropTypes.object,
   newMarkerData: React.PropTypes.array,
-  focusMarker: React.PropTypes.object
+  updateMarkers: React.PropTypes.func
 };
 
 MarkerCluster.defaultProps = {

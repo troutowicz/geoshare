@@ -8,19 +8,19 @@ const socket = isBrowser ? require('socket.io-client')() : undefined;
 class AppActions {
   constructor() {
     this.generateActions(
-      'data',
+      'updateFocusedMarker',
+      'updateFlowSuccess',
+      'updateInstaData',
       'updateMarkers',
-      'focusMarker',
-      'flowSuccess',
-      'timeout'
+      'updateTimeout'
     );
   }
 
-  flow(curFlow) {
+  updateFlow(curFlow) {
     if (curFlow === 'Pause') {
-      socket.emit('flow:pause', () => this.actions.flowSuccess('Resume'));
+      socket.emit('flow:pause', () => this.actions.updateFlowSuccess('Resume'));
     } else {
-      socket.emit('flow:start', () => this.actions.flowSuccess('Pause'));
+      socket.emit('flow:start', () => this.actions.updateFlowSuccess('Pause'));
     }
   }
 }

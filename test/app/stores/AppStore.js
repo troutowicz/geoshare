@@ -17,11 +17,11 @@ describe('AppStore', function () {
     this.UnwrappedStore.flow = this.defaultState.flow;
   });
 
-  describe('onData()', function () {
+  describe('onUpdateInstaData()', function () {
     it('should update relevant app state', function () {
       const data = ['foo', 'bar'];
 
-      this.UnwrappedStore.onData(data);
+      this.UnwrappedStore.onUpdateInstaData(data);
       assert.deepEqual(AppStore.getState().newImageData, data);
       assert.deepEqual(AppStore.getState().imageData, data);
       assert.deepEqual(AppStore.getState().focusMarker, {});
@@ -30,11 +30,11 @@ describe('AppStore', function () {
     });
   });
 
-  describe('onFocusMarker()', function () {
+  describe('onUpdateFocusedMarker()', function () {
     it('should update focusMarker state', function () {
       const data = 'foo';
 
-      this.UnwrappedStore.onFocusMarker(data);
+      this.UnwrappedStore.onUpdateFocusedMarker(data);
       assert.equal(AppStore.getState().focusMarker, data);
 
       assert.deepEqual(AppStore.getState().newImageData, this.defaultState.newImageData);
@@ -43,11 +43,11 @@ describe('AppStore', function () {
     });
   });
 
-  describe('onFlowSuccess()', function () {
+  describe('onUpdateFlowSuccess()', function () {
     it('should update flow state', function () {
       const newFlow = 'Pause';
 
-      this.UnwrappedStore.onFlowSuccess(newFlow);
+      this.UnwrappedStore.onUpdateFlowSuccess(newFlow);
       assert.equal(AppStore.getState().flow, newFlow);
 
       assert.deepEqual(AppStore.getState().newImageData, this.defaultState.newImageData);

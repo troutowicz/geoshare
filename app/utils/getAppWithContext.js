@@ -1,7 +1,7 @@
 'use strict';
 
 const React = require('react');
-const App = require('../components/App');
+const App = require('../components/AltContainer');
 
 const getAppWithContext = (initData) => {
   class AppWithContext extends React.Component {

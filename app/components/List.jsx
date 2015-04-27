@@ -1,9 +1,8 @@
 'use strict';
 
 const React = require('react/addons');
-
-const ReactCSSTransitionGroup = require('./TimeoutTransitionGroup');
 const ListItem = require('./ListItem');
+const ReactCSSTransitionGroup = require('./TimeoutTransitionGroup');
 
 class List extends React.Component {
   render() {

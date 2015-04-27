@@ -1,17 +1,13 @@
 'use strict';
 
 const isBrowser = typeof window !== 'undefined' ? true : false;
-
-const React = require('react');
-const TopBar = require('./TopBar');
-const Map = isBrowser ? require('./Map'): undefined;
-const List = require('./List');
-const { Snackbar } = require('material-ui');
 const socket = isBrowser ? require('socket.io-client')() : undefined;
 
-const AppStore = require('../stores/AppStore');
-const AppActions = require('../actions/AppActions');
-const connectToStores = require('../utils/connectToStores');
+const React = require('react');
+const List = require('./List');
+const Map = isBrowser ? require('./Map'): undefined;
+const { Snackbar } = require('material-ui');
+const TopBar = require('./TopBar');
 
 const InjectTapEventPlugin = require('react-tap-event-plugin');
 new InjectTapEventPlugin();
@@ -19,36 +15,21 @@ new InjectTapEventPlugin();
 require('../style/components/app.less');
 
 class App extends React.Component {
-  static getStores() {
-    return [AppStore];
-  }
-
-  static getStateFromStores() {
-    return {
-      newImageData: AppStore.getState().newImageData,
-      imageData: AppStore.getState().imageData,
-      markers: AppStore.getState().markers,
-      focusMarker: AppStore.getState().focusMarker,
-      flow: AppStore.getState().flow,
-      timeout: AppStore.getState().timeout
-    };
-  }
-
   componentDidMount() {
-    socket.on('data:add', this._onDataAdd);
-    socket.on('data:timeout', this._onDataTimeout);
+    socket.on('data:add', this._onNewData.bind(this));
+    socket.on('data:timeout', this._onDataTimeout.bind(this));
   }
 
-  _onDataAdd(data) {
-    AppActions.data(data);
+  _onNewData(data) {
+    this.props.updateInstaData(data);
   }
 
   _onDataTimeout(data) {
-    AppActions.timeout(data);
+    this.props.updateTimeout(data);
   }
 
   _onListItemClick(item) {
-    AppActions.focusMarker(item);
+    this.props.updateFocusedMarker(item);
   }
 
   render() {
@@ -58,9 +39,10 @@ class App extends React.Component {
     if (isBrowser) {
       map = (
         <Map
-          markers={this.props.markers}
           focusMarker={this.props.focusMarker}
+          markers={this.props.markers}
           newMarkerData={this.props.newImageData}
+          updateMarkers={this.props.updateMarkers}
         />
       );
     }
@@ -77,18 +59,19 @@ class App extends React.Component {
     return (
       <div id='app-container'>
         <TopBar
-          itemCount={Object.keys(this.props.markers).length}
           flow={this.props.flow}
+          itemCount={Object.keys(this.props.markers).length}
+          updateFlow={this.props.updateFlow}
         />
         {map}
         {alert}
         <List
           itemData={this.props.imageData}
-          onClick={this._onListItemClick}
+          onClick={this._onListItemClick.bind(this)}
         />
       </div>
     );
   }
 }
 
-module.exports = connectToStores(App);
+module.exports = App;

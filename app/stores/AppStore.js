@@ -15,7 +15,7 @@ class AppStore {
     this.timeout = false;
   }
 
-  onData(data) {
+  onUpdateInstaData(data) {
     let imageData = data.concat(this.imageData);
 
     // limit imageData (used in list) to last 100
@@ -33,15 +33,15 @@ class AppStore {
     this.markers = markers;
   }
 
-  onFocusMarker(marker) {
+  onUpdateFocusedMarker(marker) {
     this.focusMarker = marker;
   }
 
-  onFlowSuccess(newFlow) {
+  onUpdateFlowSuccess(newFlow) {
     this.flow = newFlow;
   }
 
-  onTimeout(isActive) {
+  onUpdateTimeout(isActive) {
     this.timeout = isActive;
   }
 }

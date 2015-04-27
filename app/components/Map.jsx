@@ -2,23 +2,24 @@
 
 const React = require('react');
 const LeafletMap = require('react-leaflet').Map;
-const TileLayer = require('react-leaflet').TileLayer;
 const MarkerCluster = require('./MarkerCluster');
+const TileLayer = require('react-leaflet').TileLayer;
 
 class Map extends React.Component {
   render() {
     return (
       <LeafletMap center={this.props.center} zoom={this.props.zoom} >
         <TileLayer
+          attribution={this.props.attribution}
           minZoom={this.props.minZoom}
           maxZoom={this.props.maxZoom}
           url={this.props.url}
-          attribution={this.props.attribution}
         />
         <MarkerCluster
+          focusMarker={this.props.focusMarker}
           markers={this.props.markers}
           newMarkerData={this.props.newMarkerData}
-          focusMarker={this.props.focusMarker}
+          updateMarkers={this.props.updateMarkers}
         />
       </LeafletMap>
     );
