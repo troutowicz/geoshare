@@ -3,14 +3,28 @@
 const React = require('react');
 
 class MarkerPopup extends React.Component {
+  _getStyles() {
+    return {
+      caption: {
+        wordWrap: 'break-word',
+      },
+      img: {
+        display: 'block',
+        margin: 'auto',
+      },
+    };
+  }
+
   render() {
+    const styles = this._getStyles();
+
     return (
       <div>
         <a href={this.props.profileUrl} >
-          <img src={this.props.imgUrl} />
+          <img src={this.props.imgUrl} style={styles.img} />
         </a>
         <br/>
-        <div>{this.props.caption}</div>
+        <div style={styles.caption}>{this.props.caption}</div>
       </div>
     );
   }

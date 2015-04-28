@@ -9,10 +9,26 @@ const ReactCSSTransitionGroup = require('../../../app/components/TimeoutTransiti
 
 describe('TimeoutTransitionGroup component', function () {
   before(function () {
-    this.enterCSS = 'img-enter';
-    this.enterActiveCSS = 'img-enter-active';
-    this.leaveCSS = 'img-leave';
-    this.leaveActiveCSS = 'img-leave-active';
+    this.style = {
+      enter: {
+        default: {
+          opacity: '0.01',
+          transition: 'opacity .3s ease-in'
+        },
+        active: {
+          opacity: '1'
+        }
+      },
+      leave: {
+        default: {
+          opacity: '1',
+          transition: 'opacity .3s ease-in'
+        },
+        active: {
+          opacity: '0.01'
+        }
+      }
+    };
 
     class Component extends React.Component {
       constructor(props) {
@@ -43,9 +59,9 @@ describe('TimeoutTransitionGroup component', function () {
 
         return (
           <ReactCSSTransitionGroup
-            transitionName='img'
             enterTimeout={this.props.enterTimeout}
             leaveTimeout={this.props.leaveTimeout}
+            style={this.props.style}
           >
             {child}
           </ReactCSSTransitionGroup>
@@ -64,25 +80,31 @@ describe('TimeoutTransitionGroup component', function () {
     this.clock.restore();
   });
 
-  it('should add appropriate CSS classes to entering children', function () {
+  it('should add appropriate CSS style to entering children', function () {
     let component = TestUtils.renderIntoDocument(
-      <this.Component enterTimeout={18} leaveTimeout={0} />
+      <this.Component enterTimeout={18} leaveTimeout={0} style={this.style} />
     );
 
     const child = React.findDOMNode(TestUtils.findRenderedDOMComponentWithTag(component, 'img'));
 
-    assert.equal(child.className, this.enterCSS);
+    Object.keys(this.style.enter.default).forEach((att) => {
+      assert.equal(child.style[att], this.style.enter.default[att]);
+    });
 
     this.clock.tick(17);
-    assert.equal(child.className, `${this.enterCSS} ${this.enterActiveCSS}`);
+    Object.keys(this.style.enter.active).forEach((att) => {
+      assert.equal(child.style[att], this.style.enter.active[att]);
+    });
 
     this.clock.tick(1);
-    assert.equal(child.className, '');
+    Object.keys(this.style.enter.default).forEach((att) => {
+      assert.equal(child.style[att], '');
+    });
   });
 
-  it('should add appropriate CSS classes to leaving children', function () {
+  it('should add appropriate CSS style to leaving children', function () {
     let component = TestUtils.renderIntoDocument(
-      <this.Component enterTimeout={18} leaveTimeout={18} />
+      <this.Component enterTimeout={18} leaveTimeout={18} style={this.style} />
     );
 
     const child = React.findDOMNode(TestUtils.findRenderedDOMComponentWithTag(component, 'img'));
@@ -92,18 +114,24 @@ describe('TimeoutTransitionGroup component', function () {
 
     // leave simulation
     component._simulateLeave();
-    assert.equal(child.className, this.leaveCSS);
+    Object.keys(this.style.leave.default).forEach((att) => {
+      assert.equal(child.style[att], this.style.leave.default[att]);
+    });
 
     this.clock.tick(17);
-    assert.equal(child.className, `${this.leaveCSS} ${this.leaveActiveCSS}`);
+    Object.keys(this.style.leave.active).forEach((att) => {
+      assert.equal(child.style[att], this.style.leave.active[att]);
+    });
 
     this.clock.tick(1);
-    assert.equal(child.className, '');
+    Object.keys(this.style.leave.default).forEach((att) => {
+      assert.equal(child.style[att], '');
+    });
   });
 
   it('should remove children after handling leave transition', function () {
     let component = TestUtils.renderIntoDocument(
-      <this.Component enterTimeout={18} leaveTimeout={18} />
+      <this.Component enterTimeout={18} leaveTimeout={18} style={this.style} />
     );
 
     // enter transition

@@ -5,7 +5,10 @@ const TestUtils = React.addons.TestUtils;
 
 const assert = require('chai').assert;
 
-const GithubButton = require('../../../app/components/GithubButton');
+const compWithContext = require('../../utils/compWithContext');
+const GithubButton = compWithContext(
+  require('../../../app/components/GithubButton')
+);
 
 describe('GithubButton component', function () {
   it('should set href using repoUrl property', function() {

@@ -6,7 +6,10 @@ const TestUtils = React.addons.TestUtils;
 const assert = require('chai').assert;
 const sinon = require('sinon');
 
-const AuthButton = require('../../../app/components/AuthButton');
+const compWithContext = require('../../utils/compWithContext');
+const AuthButton = compWithContext(
+  require('../../../app/components/AuthButton')
+);
 
 describe('AuthButton component', function () {
   it('should set value using label property', function() {

@@ -4,24 +4,64 @@ const React = require('react');
 const AuthButton = require('./AuthButton');
 const FlowButton = require('./FlowButton');
 const GithubButton = require('./GithubButton');
-const { Toolbar, ToolbarGroup } = require('material-ui');
+const Title = require('./Title');
+const { Toolbar, ToolbarGroup, ToolbarSeparator } = require('material-ui/lib/toolbar');
 
 class TopBar extends React.Component {
-  _onLoginClick() { window.location.href = '/auth'; }
+  _getStyles() {
+    const theme = this.context.muiTheme.component.toolbar;
 
-  _onLogoutClick() { window.location.href = '/logout'; }
+    return {
+      root: {
+        borderBottom: `1px solid ${theme.borderColor}`,
+        boxShadow: '0px 1px 6px rgba(0, 0, 0, 0.12)'
+      },
+      hashtag: {
+        position: 'absolute',
+        top: '0',
+        left: '50%',
+        transform: 'translate(-50%, 0px)',
+        color: theme.textColor,
+        fontSize: '15px',
+        lineHeight: '56px',
+      },
+      toolbarGroup: {
+        root: {
+          float: 'right'
+        },
+        flatButton: {
+          bottom: '1px',
+          margin: '0 24px'
+        },
+        iconButton: {
+          top: '4px',
+          margin: '0 -12px'
+        },
+        separator: {
+          float: 'none',
+          marginLeft: 'auto'
+        }
+      }
+    };
+  }
 
-  _onFlowClick() {
+  _onLoginTouch() { window.location.href = '/auth'; }
+
+  _onLogoutTouch() { window.location.href = '/logout'; }
+
+  _onFlowTouch() {
     this.props.updateFlow(this.props.flow);
   }
 
   render() {
+    let styles = this._getStyles.call(this);
+
     let hashtag = `#${this.context.tag}`;
-    let authClick = this._onLoginClick;
+    let authTouch = this._onLoginTouch;
     let authLabel = 'Login';
 
     if (this.context.loggedIn) {
-      authClick = this._onLogoutClick;
+      authTouch = this._onLogoutTouch;
       authLabel = 'Logout';
     }
 
@@ -30,18 +70,16 @@ class TopBar extends React.Component {
     }
 
     return (
-      <Toolbar>
-        <ToolbarGroup key={0} float='left'>
-          <div className='mui-font-style-headline'>GeoShare</div>
-        </ToolbarGroup>
-        <div className='hashtag mui-font-style-subhead-1'>
+      <Toolbar style={styles.root}>
+        <Title />
+        <div className='hashtag' style={styles.hashtag}>
           {hashtag}
         </div>
-        <ToolbarGroup key={1} float='right'>
-          <FlowButton label={this.props.flow} onClick={this._onFlowClick.bind(this)} />
-          <span className='mui-toolbar-separator'>&nbsp;</span>
-          <AuthButton label={authLabel} onClick={authClick} />
-          <GithubButton repoUrl={this.context.repoUrl} />
+        <ToolbarGroup key={1} style={styles.toolbarGroup.root}>
+          <FlowButton style={styles.toolbarGroup.flatButton} label={this.props.flow} onTouchTap={this._onFlowTouch.bind(this)} />
+          <ToolbarSeparator style={styles.toolbarGroup.separator} />
+          <AuthButton style={styles.toolbarGroup.flatButton} label={authLabel} onTouchTap={authTouch} />
+          <GithubButton style={styles.toolbarGroup.iconButton} repoUrl={this.context.repoUrl} />
         </ToolbarGroup>
       </Toolbar>
     );
@@ -50,6 +88,7 @@ class TopBar extends React.Component {
 
 TopBar.contextTypes = {
   loggedIn: React.PropTypes.bool.isRequired,
+  muiTheme: React.PropTypes.object,
   repoUrl: React.PropTypes.string.isRequired,
   tag: React.PropTypes.string.isRequired
 };
@@ -57,11 +96,13 @@ TopBar.contextTypes = {
 TopBar.propTypes = {
   flow: React.PropTypes.string,
   itemCount: React.PropTypes.number,
+  style: React.PropTypes.object,
   updateFlow: React.PropTypes.func
 };
 
 TopBar.defaultProps = {
-  itemCount: 0
+  itemCount: 0,
+  style: {}
 };
 
 module.exports = TopBar;

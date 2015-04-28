@@ -1,26 +1,42 @@
 'use strict';
 
 const React = require('react');
-const { FlatButton } = require('material-ui');
+const FlatButton = require('material-ui/lib/flat-button');
 
 class AuthButton extends React.Component {
+  _getStyles() {
+    const theme = this.context.muiTheme.component.flatButton;
+
+    return {
+      hoverColor: theme.hoverColor
+    };
+  }
+
   render() {
+    const styles = this._getStyles.call(this);
+
     return (
       <FlatButton
-        label={this.props.label}
-        onClick={this.props.onClick} />
+        {...this.props}
+        hoverColor={styles.hoverColor}
+      />
     );
   }
 }
 
+AuthButton.contextTypes = {
+  muiTheme: React.PropTypes.object
+};
+
 AuthButton.propTypes = {
   label: React.PropTypes.string,
-  onClick: React.PropTypes.func
+  onTouchTap: React.PropTypes.func,
+  style: React.PropTypes.object
 };
 
 AuthButton.defaultProps = {
   label: 'Login',
-  onClick() {}
+  style: {}
 };
 
 module.exports = AuthButton;

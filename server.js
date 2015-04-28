@@ -151,7 +151,7 @@ module.exports = (options) => {
         let data = {
           caption: `description ${counter}`,
           id: counter,
-          latlng: [Math.random() * 180 - 90, Math.random() * 360 - 180],
+          latLng: [Math.random() * 180 - 90, Math.random() * 360 - 180],
           user: {
             profile_picture: '/public/user.jpg',
             full_name: `User ${counter}`,

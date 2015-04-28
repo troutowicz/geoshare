@@ -14,11 +14,11 @@ describe('MarkerCluster component', function () {
     const data = [
       {
         id: 0,
-        latlng: [0, 0]
+        latLng: [0, 0]
       },
       {
         id: 1,
-        latlng: [1, 1]
+        latLng: [1, 1]
       }
     ];
 

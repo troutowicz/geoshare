@@ -14,7 +14,7 @@ module.exports = function (options) {
   var entry = path.join(__dirname, '..', '..', 'app', options.prerender ? 'utils/prerender' : 'app');
 
   var loaders = {
-    jsx: options.hotComponents ? ['react-hot-loader', 'babel-loader'] : 'babel-loader',
+    jsx: options.hotComponents ? ['react-hot-loader', 'babel-loader?stage=1'] : 'babel-loader?stage=1',
     png: 'url-loader?limit=10000',
     html: 'html-loader'
   };

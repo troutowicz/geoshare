@@ -5,7 +5,10 @@ const TestUtils = React.addons.TestUtils;
 
 const assert = require('chai').assert;
 
-const List = require('../../../app/components/List');
+const compWithContext = require('../../utils/compWithContext');
+const List = compWithContext(
+  require('../../../app/components/List')
+);
 const ListItem = require('../../../app/components/ListItem');
 
 describe('List component', function () {

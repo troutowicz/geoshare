@@ -6,7 +6,10 @@ const TestUtils = React.addons.TestUtils;
 const assert = require('chai').assert;
 const sinon = require('sinon');
 
-const ListItem = require('../../../app/components/ListItem');
+const compWithContext = require('../../utils/compWithContext');
+const ListItem = compWithContext(
+  require('../../../app/components/ListItem')
+);
 
 describe('ListItem component', function () {
   it('should embed children elements', function () {

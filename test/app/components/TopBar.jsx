@@ -4,7 +4,11 @@ const React = require('react/addons');
 const TestUtils = React.addons.TestUtils;
 const assert = require('chai').assert;
 
-const TopBar = require('../../../app/components/TopBar');
+const compWithContext = require('../../utils/compWithContext');
+const TopBar = compWithContext(
+  require('../../../app/components/TopBar')
+);
+const Title = require('../../../app/components/Title')
 const FlowButton = require('../../../app/components/FlowButton');
 const AuthButton = require('../../../app/components/AuthButton');
 const GithubButton = require('../../../app/components/GithubButton');
@@ -53,6 +57,7 @@ describe('TopBar component', function () {
       <this.TopBar />
     );
 
+    assert.ok(TestUtils.findRenderedComponentWithType(component, Title), 'has title');
     assert.ok(TestUtils.findRenderedComponentWithType(component, FlowButton), 'has flow button');
     assert.ok(TestUtils.findRenderedComponentWithType(component, AuthButton), 'has auth button');
     assert.ok(TestUtils.findRenderedComponentWithType(component, GithubButton), 'has github button');

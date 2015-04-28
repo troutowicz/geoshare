@@ -2,7 +2,7 @@
 
 const React = require('react');
 const Leaflet = require('leaflet');
-const MapLayer = require('react-leaflet/lib/MapLayer');
+const MapLayer = require('react-leaflet').MapLayer;
 const MarkerPopup = require('./MarkerPopup');
 require('leaflet.markercluster');
 
@@ -30,9 +30,9 @@ class MarkerCluster extends MapLayer {
           />
         );
 
-        let leafletMarker = Leaflet.marker(obj.latlng)
+        let leafletMarker = Leaflet.marker(obj.latLng)
           .bindPopup(markerPopup, {maxHeight: 350, maxWidth: 250, minWidth: 250, })
-          .on('click', () => this.props.map.panTo(obj.latlng));
+          .on('click', () => this.props.map.panTo(obj.latLng));
 
         markers[obj.id] = leafletMarker;
         newMarkers.push(leafletMarker);
@@ -50,7 +50,7 @@ class MarkerCluster extends MapLayer {
       let marker = this.props.markers[nextProps.focusMarker.id];
 
       this.leafletElement.zoomToShowLayer(marker, () => {
-        this.props.map.panTo(nextProps.focusMarker.latlng);
+        this.props.map.panTo(nextProps.focusMarker.latLng);
         marker.openPopup();
       });
     }

@@ -1,32 +1,133 @@
 'use strict';
 
 const React = require('react');
-const { Paper } = require('material-ui');
+const Paper = require('material-ui/lib/paper');
+
+const mergeAndPrefix = require('../utils/stylePropable').mergeAndPrefix;
+const transitions = require('material-ui/lib/styles/transitions');
+const typography = require('material-ui/lib/styles/typography');
 
 class ListItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {hovered: false};
+  }
+
+  _getStyles() {
+    const theme = this.context.muiTheme.component.listItem;
+
+    let backgroundColor = theme.color;
+    if (this.state.hovered) {
+      backgroundColor = this.props.hoverColor || theme.hoverColor;
+    }
+
+    return {
+      root: {
+        backgroundColor: backgroundColor,
+        cursor: 'pointer',
+        height: '72px',
+        transition: transitions.easeOut()
+      },
+      icon: {
+        root: {
+          position: 'absolute',
+          marginLeft: '16px',
+          marginTop: '19px'
+        },
+        paper: {
+          overflow: 'hidden',
+          height: '40px'
+        },
+        image: {
+          width: '40px'
+        }
+      },
+      content: {
+        root: {
+          paddingLeft: '72px',
+          paddingRight: '16px',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          overflow: 'hidden'
+        },
+        title: {
+          paddingTop: '20px',
+          fontSize: '1.2em',
+          fontWeight: typography.fontWeightMedium
+        },
+        description: {
+          marginTop: '-4px',
+          fontSize: '0.75em'
+        }
+      },
+      borderBottom: {
+        position: 'absolute',
+        marginTop: '16px',
+        right: '0',
+        left: '72px',
+        borderBottom: `1px solid ${theme.borderColor}`
+      }
+    };
+  }
+
+  _handleMouseOver(e) {
+    this.setState({hovered: true});
+    if (this.props.onMouseOver) {
+      this.props.onMouseOver(e);
+    }
+  }
+
+  _handleMouseOut(e) {
+    this.setState({hovered: false});
+    if (this.props.onMouseOut) {
+      this.props.onMouseOut(e);
+    }
+  }
+
   render() {
+    const styles = this._getStyles();
+    const {
+      description,
+      icon,
+      onMouseOut,
+      onMouseOver,
+      title,
+      ...other
+    } = this.props;
+
     return (
-      <li className='mui-list-item' onClick={this.props.onClick} >
-        <div className='icon'>
-          <Paper className='mui-paper' zDepth={0} circle={true} >
-            <img src={this.props.icon} />
+      <li
+        {...other}
+        onMouseOut={this._handleMouseOut.bind(this)}
+        onMouseOver={this._handleMouseOver.bind(this)}
+        style={mergeAndPrefix(styles.root)}
+      >
+        <div className='icon' style={styles.icon.root}>
+          <Paper style={styles.icon.paper} zDepth={0} circle={true} >
+            <img style={styles.icon.image} src={icon} />
           </Paper>
         </div>
-        <div className='content'>
-          <div className='title' dangerouslySetInnerHTML={{__html: this.props.title}}></div>
-          <div className='description' dangerouslySetInnerHTML={{__html: this.props.description}}></div>
+        <div className='content' style={styles.content.root}>
+          <div style={styles.content.title} dangerouslySetInnerHTML={{__html: title}}></div>
+          <div style={styles.content.description} dangerouslySetInnerHTML={{__html: description}}></div>
         </div>
-        <div className='border-bottom' />
+        <div className='border-bottom' style={styles.borderBottom} />
       </li>
     );
   }
 }
 
+ListItem.contextTypes = {
+  muiTheme: React.PropTypes.object
+};
+
 ListItem.propTypes = {
-  icon: React.PropTypes.string,
-  title: React.PropTypes.string,
   description: React.PropTypes.string,
-  onClick: React.PropTypes.func
+  hoverStyle: React.PropTypes.string,
+  icon: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+  title: React.PropTypes.string
 };
 
 ListItem.defaultProps = {

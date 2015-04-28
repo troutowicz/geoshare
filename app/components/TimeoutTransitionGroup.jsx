@@ -81,39 +81,20 @@ function animationSupported() {
   return endEvents.length !== 0;
 }
 
-/**
- * Functions for element class management to replace dependency on jQuery
- * addClass, removeClass and hasClass
- */
-function addClass(element, className) {
-  if (element.classList) {
-    element.classList.add(className);
-  } else if (!hasClass(element, className)) {
-    element.className = `${element.className} ${className}`;
-  }
+function addStyle(element, style) {
+  Object.keys(style).forEach((att) => {
+    element.style[att] = style[att];
+  });
 
   return element;
 }
 
-function removeClass(element, className) {
-  if (hasClass(className)) {
-    if (element.classList) {
-      element.classList.remove(className);
-    } else {
-      element.className = (` ${element.className} `)
-        .replace(` ${className} `, ' ').trim();
-    }
-  }
+function removeStyle(element, style) {
+  Object.keys(style).forEach((att) => {
+    element.style[att] = '';
+  });
 
   return element;
-}
-
-function hasClass(element, className) {
-  if (element.classList) {
-    return element.classList.contains(className);
-  } else {
-    return (` ${element.className} `).indexOf(` ${className} `) > -1;
-  }
 }
 
 class TimeoutTransitionGroupChild extends React.Component {
@@ -121,18 +102,15 @@ class TimeoutTransitionGroupChild extends React.Component {
     super();
 
     this._transition = this._transition.bind(this);
-    this._queueClass = this._queueClass.bind(this);
+    this._queueStyle = this._queueStyle.bind(this);
     this._flushClassNameQueue = this._flushClassNameQueue.bind(this);
   }
 
   _transition(animationType, finishCallback) {
     let node = React.findDOMNode(this);
-    const className = `${this.props.name}-${animationType}`;
-    const activeClassName = className + '-active';
 
     const endListener = () => {
-      removeClass(node, className);
-      removeClass(node, activeClassName);
+      removeStyle(node, this.props.style[animationType].default);
 
       // Usually this optional callback is used for informing an owner of
       // a leave animation and telling it to remove the child.
@@ -151,14 +129,14 @@ class TimeoutTransitionGroupChild extends React.Component {
       }
     }
 
-    addClass(node, className);
+    addStyle(node, this.props.style[animationType].default);
 
     // Need to do this to actually trigger a transition.
-    this._queueClass(activeClassName);
+    this._queueStyle(this.props.style[animationType].active);
   }
 
-  _queueClass(className) {
-    this.classNameQueue.push(className);
+  _queueStyle(style) {
+    this.styleQueue.push(style);
 
     if (!this.timeout) {
       this.timeout = setTimeout(this._flushClassNameQueue, TICK);
@@ -166,16 +144,16 @@ class TimeoutTransitionGroupChild extends React.Component {
   }
 
   _flushClassNameQueue() {
-    this.classNameQueue.forEach((name) => {
-      addClass(React.findDOMNode(this), name);
+    this.styleQueue.forEach((style) => {
+      addStyle(React.findDOMNode(this), style);
     });
 
-    this.classNameQueue.length = 0;
+    this.styleQueue.length = 0;
     this.timeout = null;
   }
 
   componentWillMount() {
-    this.classNameQueue = [];
+    this.styleQueue = [];
   }
 
   componentWillUnmount() {
@@ -221,9 +199,9 @@ class TimeoutTransitionGroup extends React.Component {
       <TimeoutTransitionGroupChild
         enterTimeout={this.props.enterTimeout}
         leaveTimeout={this.props.leaveTimeout}
-        name={this.props.transitionName}
         enter={this.props.transitionEnter}
         leave={this.props.transitionLeave}
+        style={this.props.style}
       >
         {child}
       </TimeoutTransitionGroupChild>
@@ -231,9 +209,11 @@ class TimeoutTransitionGroup extends React.Component {
   }
 
   render() {
+    const {style, ...props} = this.props;
+
     return (
       <ReactTransitionGroup
-        {...this.props}
+        {...props}
         childFactory={this._wrapChild}
       />
     );
@@ -243,7 +223,7 @@ class TimeoutTransitionGroup extends React.Component {
 TimeoutTransitionGroup.propTypes = {
   enterTimeout: React.PropTypes.number.isRequired,
   leaveTimeout: React.PropTypes.number.isRequired,
-  transitionName: React.PropTypes.string.isRequired,
+  style: React.PropTypes.object.isRequired,
   transitionEnter: React.PropTypes.bool,
   transitionLeave: React.PropTypes.bool,
 };

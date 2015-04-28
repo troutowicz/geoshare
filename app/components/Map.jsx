@@ -8,11 +8,15 @@ const TileLayer = require('react-leaflet').TileLayer;
 class Map extends React.Component {
   render() {
     return (
-      <LeafletMap center={this.props.center} zoom={this.props.zoom} >
+      <LeafletMap
+        center={this.props.center}
+        style={this.props.style}
+        zoom={this.props.zoom}
+      >
         <TileLayer
           attribution={this.props.attribution}
-          minZoom={this.props.minZoom}
           maxZoom={this.props.maxZoom}
+          minZoom={this.props.minZoom}
           url={this.props.url}
         />
         <MarkerCluster
@@ -27,24 +31,26 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
-  center: React.PropTypes.array,
-  zoom: React.PropTypes.number,
-  minZoom: React.PropTypes.number,
-  maxZoom: React.PropTypes.number,
-  url: React.PropTypes.string,
   attribution: React.PropTypes.string,
+  center: React.PropTypes.array,
+  focusMarker: React.PropTypes.object,
   markers: React.PropTypes.object,
+  maxZoom: React.PropTypes.number,
+  minZoom: React.PropTypes.number,
   newMarkerData: React.PropTypes.array,
-  focusMarker: React.PropTypes.object
+  style: React.PropTypes.object,
+  url: React.PropTypes.string,
+  zoom: React.PropTypes.number
 };
 
 Map.defaultProps = {
+  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
   center: [0, 0],
-  zoom: 3,
-  minZoom: 3,
   maxZoom: 16,
+  minZoom: 3,
+  style: {},
   url: 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
-  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  zoom: 3
 };
 
 module.exports = Map;

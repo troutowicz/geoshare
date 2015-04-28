@@ -6,7 +6,10 @@ const TestUtils = React.addons.TestUtils;
 const assert = require('chai').assert;
 const sinon = require('sinon');
 
-const FlowButton = require('../../../app/components/FlowButton');
+const compWithContext = require('../../utils/compWithContext');
+const FlowButton = compWithContext(
+  require('../../../app/components/FlowButton')
+);
 
 describe('FlowButton component', function () {
   it('should set value using label property', function () {
