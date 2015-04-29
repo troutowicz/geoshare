@@ -1,6 +1,6 @@
 'use strict';
 
-const isBrowser = typeof window !== 'undefined' ? true : false;
+const isBrowser = typeof window !== 'undefined';
 
 const alt = require('../alt');
 const socket = isBrowser ? require('socket.io-client')() : undefined;
