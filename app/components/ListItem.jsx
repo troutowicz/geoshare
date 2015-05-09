@@ -23,24 +23,24 @@ class ListItem extends React.Component {
 
     return {
       root: {
-        backgroundColor: backgroundColor,
+        backgroundColor,
         cursor: 'pointer',
         height: '72px',
-        transition: transitions.easeOut()
+        transition: transitions.easeOut(),
       },
       icon: {
         root: {
           position: 'absolute',
           marginLeft: '16px',
-          marginTop: '19px'
+          marginTop: '19px',
         },
         paper: {
           overflow: 'hidden',
-          height: '40px'
+          height: '40px',
         },
         image: {
-          width: '40px'
-        }
+          width: '40px',
+        },
       },
       content: {
         root: {
@@ -48,25 +48,25 @@ class ListItem extends React.Component {
           paddingRight: '16px',
           whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
-          overflow: 'hidden'
+          overflow: 'hidden',
         },
         title: {
           paddingTop: '20px',
           fontSize: '1.2em',
-          fontWeight: typography.fontWeightMedium
+          fontWeight: typography.fontWeightMedium,
         },
         description: {
           marginTop: '-4px',
-          fontSize: '0.75em'
-        }
+          fontSize: '0.75em',
+        },
       },
       borderBottom: {
         position: 'absolute',
         marginTop: '16px',
         right: '0',
         left: '72px',
-        borderBottom: `1px solid ${theme.borderColor}`
-      }
+        borderBottom: `1px solid ${theme.borderColor}`,
+      },
     };
   }
 
@@ -86,6 +86,7 @@ class ListItem extends React.Component {
 
   render() {
     const styles = this._getStyles();
+    /* eslint-disable */
     const {
       description,
       icon,
@@ -94,6 +95,7 @@ class ListItem extends React.Component {
       title,
       ...other
     } = this.props;
+    /* eslint-enable */
 
     return (
       <li
@@ -103,13 +105,13 @@ class ListItem extends React.Component {
         style={mergeAndPrefix(styles.root)}
       >
         <div className='icon' style={styles.icon.root}>
-          <Paper style={styles.icon.paper} zDepth={0} circle={true} >
-            <img style={styles.icon.image} src={icon} />
+          <Paper circle={true} style={styles.icon.paper} zDepth={0} >
+            <img src={icon} style={styles.icon.image} />
           </Paper>
         </div>
         <div className='content' style={styles.content.root}>
-          <div style={styles.content.title} dangerouslySetInnerHTML={{__html: title}}></div>
-          <div style={styles.content.description} dangerouslySetInnerHTML={{__html: description}}></div>
+          <div dangerouslySetInnerHTML={{__html: title}} style={styles.content.title} ></div>
+          <div dangerouslySetInnerHTML={{__html: description}} style={styles.content.description} ></div>
         </div>
         <div className='border-bottom' style={styles.borderBottom} />
       </li>
@@ -118,20 +120,22 @@ class ListItem extends React.Component {
 }
 
 ListItem.contextTypes = {
-  muiTheme: React.PropTypes.object
+  muiTheme: React.PropTypes.object,
 };
 
 ListItem.propTypes = {
   description: React.PropTypes.string,
-  hoverStyle: React.PropTypes.string,
+  hoverColor: React.PropTypes.string,
   icon: React.PropTypes.string,
   onClick: React.PropTypes.func,
-  title: React.PropTypes.string
+  onMouseOut: React.PropTypes.func,
+  onMouseOver: React.PropTypes.func,
+  title: React.PropTypes.string,
 };
 
 ListItem.defaultProps = {
+  description: '',
   title: '',
-  description: ''
 };
 
 export default ListItem;

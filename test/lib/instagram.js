@@ -10,7 +10,7 @@ describe('instagram lib', function () {
   beforeEach(function () {
     this.tokens = {
       valid: [],
-      expired: {}
+      expired: {},
     };
   });
 
@@ -109,8 +109,12 @@ describe('instagram lib', function () {
   describe('emitImageMedia()', function () {
     beforeEach(function() {
       this.io = {
-        to() { return this; },
-        emit() { return true; }
+        to() {
+          return this;
+        },
+        emit() {
+          return true;
+        },
       };
 
       this.emit = sinon.spy(this.io, 'emit');
@@ -126,18 +130,18 @@ describe('instagram lib', function () {
           type: 'image',
           location: {
             latitude: 0,
-            longitude: 0
+            longitude: 0,
           },
           id: '1',
           user: {
-            username: 'someone'
+            username: 'someone',
           },
           images: {
             thumbnail: {
-              url: 'localhost/i.png'
-            }
-          }
-        }
+              url: 'localhost/i.png',
+            },
+          },
+        },
       ];
 
       instagram.emitImageMedia(medias, this.io);
@@ -147,8 +151,8 @@ describe('instagram lib', function () {
     it('should not emit media of type image without location', function () {
       const medias = [
         {
-          type: 'image'
-        }
+          type: 'image',
+        },
       ];
 
       instagram.emitImageMedia(medias, this.io);
@@ -161,9 +165,9 @@ describe('instagram lib', function () {
           type: 'video',
           location: {
             latitude: 0,
-            longitude: 0
-          }
-        }
+            longitude: 0,
+          },
+        },
       ];
 
       instagram.emitImageMedia(medias, this.io);

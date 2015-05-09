@@ -10,7 +10,7 @@ describe('AppActions', function () {
   describe('updateFlow()', function () {
     beforeEach(function () {
       const socket = {
-        emit() {}
+        emit() {},
       };
 
       this.emit = sinon.stub(socket, 'emit').yields();

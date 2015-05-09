@@ -38,8 +38,9 @@ Map.propTypes = {
   minZoom: React.PropTypes.number,
   newMarkerData: React.PropTypes.array,
   style: React.PropTypes.object,
+  updateMarkers: React.PropTypes.func,
   url: React.PropTypes.string,
-  zoom: React.PropTypes.number
+  zoom: React.PropTypes.number,
 };
 
 Map.defaultProps = {
@@ -49,7 +50,7 @@ Map.defaultProps = {
   minZoom: 3,
   style: {},
   url: 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
-  zoom: 3
+  zoom: 3,
 };
 
 export default Map;

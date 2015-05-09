@@ -11,7 +11,7 @@ export default (Component) => {
   class CompWithContext extends React.Component {
     getChildContext() {
       return {
-        muiTheme: themeManager.getCurrentTheme()
+        muiTheme: themeManager.getCurrentTheme(),
       };
     }
 
@@ -21,7 +21,7 @@ export default (Component) => {
   }
 
   CompWithContext.childContextTypes = {
-    muiTheme: React.PropTypes.object
+    muiTheme: React.PropTypes.object,
   };
 
   return CompWithContext;

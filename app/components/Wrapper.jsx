@@ -32,7 +32,7 @@ class Wrapper extends React.Component {
 
   render() {
     return (
-      <AltContainer store={AppStore} actions={AppActions} >
+      <AltContainer actions={AppActions} store={AppStore} >
         <App />
       </AltContainer>
     );
@@ -43,11 +43,11 @@ Wrapper.childContextTypes = {
   tag: React.PropTypes.string.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
   muiTheme: React.PropTypes.object,
-  repoUrl: React.PropTypes.string.isRequired
+  repoUrl: React.PropTypes.string.isRequired,
 };
 
-Wrapper.PropTypes = {
-  initData: React.PropTypes.object.isRequired
+Wrapper.propTypes = {
+  initData: React.PropTypes.object.isRequired,
 };
 
 export default Wrapper;

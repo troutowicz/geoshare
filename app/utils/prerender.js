@@ -1,6 +1,6 @@
 'use strict';
 
-import React from  'react';
+import React from 'react';
 import Iso from 'iso';
 import Wrapper from '../components/Wrapper';
 

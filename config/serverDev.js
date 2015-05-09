@@ -1,5 +1,5 @@
 'use strict';
 
 require('../server')({
-  testData: true
+  testData: true,
 });

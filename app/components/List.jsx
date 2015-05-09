@@ -11,28 +11,28 @@ class List extends React.Component {
       root: {
         listStyleType: 'none',
         padding: '8px 0',
-        margin: '0'
+        margin: '0',
       },
       transition: {
         enter: {
           default: {
             opacity: '0.01',
-            transition: 'opacity .3s ease-in'
+            transition: 'opacity .3s ease-in',
           },
           active: {
-            opacity: '1'
-          }
+            opacity: '1',
+          },
         },
         leave: {
           default: {
             opacity: '1',
-            transition: 'opacity .3s ease-in'
+            transition: 'opacity .3s ease-in',
           },
           active: {
-            opacity: '0.01'
-          }
-        }
-      }
+            opacity: '0.01',
+          },
+        },
+      },
     };
   }
 
@@ -49,11 +49,11 @@ class List extends React.Component {
           {this.props.itemData.map((obj) => {
             return (
               <ListItem
-                icon={obj.user.profile_picture}
-                title={obj.user.full_name.trim() || '-'}
                 description={obj.user.username}
-                onClick={this.props.onClick ? this.props.onClick.bind(null, obj) : undefined}
+                icon={obj.user.profile_picture}
                 key={obj.id}
+                onClick={this.props.onClick ? this.props.onClick.bind(null, obj) : undefined}
+                title={obj.user.full_name.trim() || '-'}
               />
             );
           })}
@@ -66,11 +66,11 @@ class List extends React.Component {
 List.propTypes = {
   itemData: React.PropTypes.array,
   onClick: React.PropTypes.func,
-  style: React.PropTypes.object
+  style: React.PropTypes.object,
 };
 
 List.defaultProps = {
-  style: {}
-}
+  style: {},
+};
 
 export default List;

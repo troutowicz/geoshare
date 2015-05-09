@@ -11,8 +11,8 @@ class GithubButton extends React.Component {
       rippleColor: theme.rippleColor,
       icon: {
         color: theme.color,
-        iconHoverColor: theme.hoverColor
-      }
+        iconHoverColor: theme.hoverColor,
+      },
     };
   }
 
@@ -33,16 +33,16 @@ class GithubButton extends React.Component {
 }
 
 GithubButton.contextTypes = {
-  muiTheme: React.PropTypes.object
+  muiTheme: React.PropTypes.object,
 };
 
 GithubButton.propTypes = {
   repoUrl: React.PropTypes.string,
-  style: React.PropTypes.object
+  style: React.PropTypes.object,
 };
 
 GithubButton.defaultProps = {
-  style: {}
-}
+  style: {},
+};
 
 export default GithubButton;

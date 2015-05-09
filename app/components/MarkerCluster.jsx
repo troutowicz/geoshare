@@ -2,9 +2,10 @@
 
 import React from 'react';
 import Leaflet from 'leaflet';
-import leafletMarkercluster from 'leaflet.markercluster';
 import MarkerPopup from './MarkerPopup';
 import { MapLayer } from 'react-leaflet';
+
+require('leaflet.markercluster');
 
 class MarkerCluster extends MapLayer {
   componentWillMount() {
@@ -31,7 +32,7 @@ class MarkerCluster extends MapLayer {
         );
 
         let leafletMarker = Leaflet.marker(obj.latLng)
-          .bindPopup(markerPopup, {maxHeight: 350, maxWidth: 250, minWidth: 250, })
+          .bindPopup(markerPopup, {maxHeight: 350, maxWidth: 250, minWidth: 250})
           .on('click', () => this.props.map.panTo(obj.latLng));
 
         markers[obj.id] = leafletMarker;
@@ -67,15 +68,16 @@ class MarkerCluster extends MapLayer {
 
 MarkerCluster.propTypes = {
   focusMarker: React.PropTypes.object,
+  map: React.PropTypes.object,
   markers: React.PropTypes.object,
   newMarkerData: React.PropTypes.array,
-  updateMarkers: React.PropTypes.func
+  updateMarkers: React.PropTypes.func,
 };
 
 MarkerCluster.defaultProps = {
   markers: {},
   newMarkerData: [],
-  focusMarker: {}
+  focusMarker: {},
 };
 
 export default MarkerCluster;

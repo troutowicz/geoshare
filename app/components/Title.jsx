@@ -18,15 +18,15 @@ class Title extends React.Component {
       color: this.state.hovered ? theme.hoverColor : theme.color,
       fontSize: '24px',
       paddingRight: '0',
-      transition: transitions.easeOut()
+      transition: transitions.easeOut(),
     };
   }
 
-  _handleMouseOver(e) {
+  _handleMouseOver() {
     this.setState({hovered: true});
   }
 
-  _handleMouseOut(e) {
+  _handleMouseOut() {
     this.setState({hovered: false});
   }
 
@@ -45,11 +45,11 @@ class Title extends React.Component {
 }
 
 Title.contextTypes = {
-  muiTheme: React.PropTypes.object
+  muiTheme: React.PropTypes.object,
 };
 
 Title.propTypes = {
-  text: React.PropTypes.string
+  text: React.PropTypes.string,
 };
 
 export default Title;

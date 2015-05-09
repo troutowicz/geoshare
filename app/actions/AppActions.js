@@ -3,8 +3,9 @@
 import alt from '../alt';
 import io from 'socket.io-client';
 
+let socket;
 if (typeof window !== 'undefined') {
-  var socket = io();
+  socket = io();
 }
 
 class AppActions {

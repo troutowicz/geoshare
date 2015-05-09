@@ -5,7 +5,7 @@ import { assert } from 'chai';
 
 import MarkerCluster from '../../../app/components/MarkerCluster';
 import MyMap from '../../../app/components/Map';
-import { Map } from 'react-leaflet';
+// import { Map } from 'react-leaflet';
 
 const TestUtils = React.addons.TestUtils;
 
@@ -14,12 +14,12 @@ describe('MarkerCluster component', function () {
     const data = [
       {
         id: 0,
-        latLng: [0, 0]
+        latLng: [0, 0],
       },
       {
         id: 1,
-        latLng: [1, 1]
-      }
+        latLng: [1, 1],
+      },
     ];
 
     const component = React.render(

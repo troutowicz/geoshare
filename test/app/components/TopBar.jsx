@@ -28,7 +28,11 @@ describe('TopBar component', function () {
     TopBarWithContext.childContextTypes = {
       tag: React.PropTypes.string.isRequired,
       loggedIn: React.PropTypes.bool.isRequired,
-      repoUrl: React.PropTypes.string.isRequired
+      repoUrl: React.PropTypes.string.isRequired,
+    };
+
+    TopBarWithContext.propTypes = {
+      itemCount: React.PropTypes.number,
     };
 
     this.TopBar = TopBarWithContext;
