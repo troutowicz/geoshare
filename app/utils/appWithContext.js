@@ -1,9 +1,8 @@
 'use strict';
 
 const React = require('react');
-const App = require('../components/AltContainer');
 
-const getAppWithContext = (initData) => {
+const appWithContext = (App, initData) => {
   class AppWithContext extends React.Component {
     getChildContext() {
       return initData.ctx;
@@ -23,4 +22,4 @@ const getAppWithContext = (initData) => {
   return AppWithContext;
 };
 
-module.exports = getAppWithContext;
+module.exports = appWithContext;

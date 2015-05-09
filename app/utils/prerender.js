@@ -2,11 +2,13 @@
 
 const React = require('react');
 const Iso = require('iso');
-const getAppWithContext = require('./getAppWithContext');
 const html = require('../index.html');
 
+const appWithContext = require('./appWithContext');
+const App = require('../components/AltContainer');
+
 const prerender = (initData, scriptUrl, styleUrl, callback) => {
-  const Component = React.createElement(getAppWithContext(initData));
+  const Component = React.createElement(appWithContext(App, initData));
 
   // format the full page
   callback(null, html
