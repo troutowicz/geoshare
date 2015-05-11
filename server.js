@@ -149,14 +149,14 @@ module.exports = (options) => {
       let counter = 1;
       setInterval (() => {
         let data = {
+          caption: `description ${counter}`,
           id: counter,
           latlng: [Math.random() * 180 - 90, Math.random() * 360 - 180],
           user: {
             profile_picture: '/public/user.jpg',
             full_name: `User ${counter}`,
-            username: `user ${counter}`
+            username: `user ${counter}`,
           },
-          marker_popup: `<div>description ${counter}</div>`
         };
 
         io.to('realtime').emit('data:add', [data], true);

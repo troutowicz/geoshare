@@ -3,6 +3,7 @@
 const React = require('react');
 const Leaflet = require('leaflet');
 const MapLayer = require('react-leaflet/lib/MapLayer');
+const MarkerPopup = require('./MarkerPopup');
 require('leaflet.markercluster');
 
 class MarkerCluster extends MapLayer {
@@ -21,8 +22,16 @@ class MarkerCluster extends MapLayer {
       let newMarkers = [];
 
       nextProps.newMarkerData.forEach((obj) => {
+        let markerPopup = React.renderToStaticMarkup(
+          <MarkerPopup
+            caption={obj.caption}
+            imgUrl={obj.imgUrl}
+            profileUrl={obj.profileUrl}
+          />
+        );
+
         let leafletMarker = Leaflet.marker(obj.latlng)
-          .bindPopup(obj.marker_popup)
+          .bindPopup(markerPopup)
           .on('click', () => this.props.map.panTo(obj.latlng));
 
         markers[obj.id] = leafletMarker;
