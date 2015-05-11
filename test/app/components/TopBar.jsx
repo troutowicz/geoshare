@@ -36,7 +36,7 @@ describe('TopBar component', function () {
     );
     const counter = TestUtils.findRenderedDOMComponentWithClass(component, 'hashtag');
 
-    assert.equal(counter.getDOMNode().textContent, '#tag (1)', 'counter visible');
+    assert.equal(React.findDOMNode(counter).textContent, '#tag (1)', 'counter visible');
   });
 
   it('should not display counter when itemCount property == 0', function () {
@@ -45,7 +45,7 @@ describe('TopBar component', function () {
     );
     const counter = TestUtils.findRenderedDOMComponentWithClass(component, 'hashtag');
 
-    assert.equal(counter.getDOMNode().textContent, '#tag', 'counter not visible');
+    assert.equal(React.findDOMNode(counter).textContent, '#tag', 'counter not visible');
   });
 
   it('should embed children components', function () {
