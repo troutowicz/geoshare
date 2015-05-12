@@ -31,7 +31,7 @@ class MarkerCluster extends MapLayer {
         );
 
         let leafletMarker = Leaflet.marker(obj.latlng)
-          .bindPopup(markerPopup)
+          .bindPopup(markerPopup, {maxHeight: 350, maxWidth: 250, minWidth: 250, })
           .on('click', () => this.props.map.panTo(obj.latlng));
 
         markers[obj.id] = leafletMarker;
