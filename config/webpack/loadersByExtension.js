@@ -1,5 +1,11 @@
 'use strict';
 
+function extsToRegExp(exts) {
+  return new RegExp('\\.(' + exts.map(function (ext) {
+    return ext.replace(/\./g, '\\.');
+  }).join('|') + ')(\\?.*)?$');
+}
+
 module.exports = function loadersByExtension(obj) {
   var loaders = [];
 
@@ -28,9 +34,3 @@ module.exports = function loadersByExtension(obj) {
 
   return loaders;
 };
-
-function extsToRegExp(exts) {
-  return new RegExp('\\.(' + exts.map(function (ext) {
-    return ext.replace(/\./g, '\\.') + '(\\?.*)?';
-  }).join('|') + ')$');
-}

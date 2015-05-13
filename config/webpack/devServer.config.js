@@ -3,6 +3,6 @@
 module.exports = require('./makeConfig')({
   devServer: true,
   hotComponents: true,
-  devtool: 'eval',
+  devtool: 'source-map',
   debug: true,
 });
