@@ -2,7 +2,7 @@
 @import '~leaflet.markercluster/dist/MarkerCluster.Default.css';
 @import '~leaflet.markercluster/dist/MarkerCluster.css';
 
-@import './font-icons.less';
+@import './font-icons.css';
 
 /* map */
 .leaflet-popup-content-wrapper {

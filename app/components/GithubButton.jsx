@@ -2,31 +2,36 @@
 
 const React = require('react');
 const IconButton = require('material-ui/lib/icon-button');
+const StyleSheet = require('react-style');
 
 class GithubButton extends React.Component {
-  _getStyle() {
+  _getStyles() {
     const theme = this.context.muiTheme.component.githubButton;
 
-    return {
-      rippleColor: theme.rippleColor,
+    return StyleSheet.create({
       icon: {
         color: theme.color,
         iconHoverColor: theme.hoverColor
-      }
-    };
+      },
+      rippleColor: theme.rippleColor
+    });
   }
 
   render() {
-    const styles = this._getStyle();
+    const styles = this._getStyles();
+    const {
+      repoUrl,
+      ...other
+    } = this.props;
 
     return (
       <IconButton
+        {...other}
         focusRippleColor={styles.rippleColor}
-        href={this.props.repoUrl}
+        href={repoUrl}
         iconClassName='mui-icon-github'
         iconStyle={styles.icon}
         linkButton={true}
-        style={this.props.style}
         touchRippleColor={styles.rippleColor} />
     );
   }

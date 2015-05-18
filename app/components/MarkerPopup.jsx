@@ -1,10 +1,11 @@
 'use strict';
 
 const React = require('react');
+const StyleSheet = require('react-style');
 
 class MarkerPopup extends React.Component {
   _getStyles() {
-    return {
+    return StyleSheet.create({
       caption: {
         wordWrap: 'break-word',
       },
@@ -12,7 +13,7 @@ class MarkerPopup extends React.Component {
         display: 'block',
         margin: 'auto',
       },
-    };
+    });
   }
 
   render() {
@@ -21,10 +22,10 @@ class MarkerPopup extends React.Component {
     return (
       <div>
         <a href={this.props.profileUrl} >
-          <img src={this.props.imgUrl} style={styles.img} />
+          <img src={this.props.imgUrl} styles={styles.img} />
         </a>
         <br/>
-        <div style={styles.caption}>{this.props.caption}</div>
+        <div styles={styles.caption}>{this.props.caption}</div>
       </div>
     );
   }

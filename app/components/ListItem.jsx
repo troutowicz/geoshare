@@ -3,7 +3,7 @@
 const React = require('react');
 const Paper = require('material-ui/lib/paper');
 
-const mergeAndPrefix = require('../utils/stylePropable').mergeAndPrefix;
+const StyleSheet = require('react-style');
 const transitions = require('material-ui/lib/styles/transitions');
 const typography = require('material-ui/lib/styles/typography');
 
@@ -22,7 +22,7 @@ class ListItem extends React.Component {
       backgroundColor = this.props.hoverColor || theme.hoverColor;
     }
 
-    return {
+    return StyleSheet.create({
       root: {
         backgroundColor: backgroundColor,
         cursor: 'pointer',
@@ -68,7 +68,7 @@ class ListItem extends React.Component {
         left: '72px',
         borderBottom: `1px solid ${theme.borderColor}`
       }
-    };
+    });
   }
 
   _handleMouseOver(e) {
@@ -101,18 +101,18 @@ class ListItem extends React.Component {
         {...other}
         onMouseOut={this._handleMouseOut.bind(this)}
         onMouseOver={this._handleMouseOver.bind(this)}
-        style={mergeAndPrefix(styles.root)}
+        styles={styles.root}
       >
-        <div className='icon' style={styles.icon.root}>
-          <Paper style={styles.icon.paper} zDepth={0} circle={true} >
-            <img style={styles.icon.image} src={icon} />
+        <div className='icon' styles={styles.icon.root}>
+          <Paper styles={styles.icon.paper} zDepth={0} circle={true} >
+            <img styles={styles.icon.image} src={icon} />
           </Paper>
         </div>
-        <div className='content' style={styles.content.root}>
-          <div style={styles.content.title} dangerouslySetInnerHTML={{__html: title}}></div>
-          <div style={styles.content.description} dangerouslySetInnerHTML={{__html: description}}></div>
+        <div className='content' styles={styles.content.root}>
+          <div styles={styles.content.title} dangerouslySetInnerHTML={{__html: title}}></div>
+          <div styles={styles.content.description} dangerouslySetInnerHTML={{__html: description}}></div>
         </div>
-        <div className='border-bottom' style={styles.borderBottom} />
+        <div className='border-bottom' styles={styles.borderBottom} />
       </li>
     );
   }

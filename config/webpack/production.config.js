@@ -9,5 +9,6 @@ module.exports = [
   }),
   require('./makeConfig')({
     prerender: true,
+    prod: true
   })
 ];

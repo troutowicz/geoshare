@@ -4,6 +4,7 @@ var config = require('config');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var loadersByExtension = require('./loadersByExtension');
 var path = require('path');
+var ReactStylePlugin = require('react-style-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
 var Webpack = require('webpack');
 
@@ -20,13 +21,18 @@ module.exports = function (options) {
   };
 
   var stylesheetLoaders = {
-    css: 'css-loader!autoprefixer-loader',
-    less: 'css-loader!autoprefixer-loader!less-loader'
+    css: 'css-loader'
   };
 
   var additionalLoaders = [
     { test: /app\/.*\.js$/, loader: 'babel-loader' }
   ];
+
+  if (options.prod) {
+    additionalLoaders.push(
+      { test: /app\/components\/.*\.jsx$/, loader: ReactStylePlugin.loader() }
+    )
+  }
 
   var externals = [];
   var modulesDirectories = ['web_modules', 'node_modules'];
@@ -91,7 +97,7 @@ module.exports = function (options) {
   });
 
   if (options.separateStylesheet && !options.prerender) {
-    plugins.push(new ExtractTextPlugin('[name].css' + (options.longTermCaching ? '?[contenthash]' : '')));
+    plugins.push(new ReactStylePlugin('[name].css' + (options.longTermCaching ? '?[contenthash]' : '')));
   }
 
   if (options.minimize && !options.prerender) {

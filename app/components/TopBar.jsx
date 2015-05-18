@@ -6,12 +6,13 @@ const FlowButton = require('./FlowButton');
 const GithubButton = require('./GithubButton');
 const Title = require('./Title');
 const { Toolbar, ToolbarGroup, ToolbarSeparator } = require('material-ui/lib/toolbar');
+const StyleSheet = require('react-style');
 
 class TopBar extends React.Component {
   _getStyles() {
     const theme = this.context.muiTheme.component.toolbar;
 
-    return {
+    return StyleSheet.create({
       root: {
         borderBottom: `1px solid ${theme.borderColor}`,
         boxShadow: '0px 1px 6px rgba(0, 0, 0, 0.12)'
@@ -42,7 +43,7 @@ class TopBar extends React.Component {
           marginLeft: 'auto'
         }
       }
-    };
+    });
   }
 
   _onLoginTouch() { window.location.href = '/auth'; }
@@ -70,16 +71,16 @@ class TopBar extends React.Component {
     }
 
     return (
-      <Toolbar style={styles.root}>
+      <Toolbar styles={styles.root}>
         <Title />
-        <div className='hashtag' style={styles.hashtag}>
+        <div className='hashtag' styles={styles.hashtag}>
           {hashtag}
         </div>
-        <ToolbarGroup key={1} style={styles.toolbarGroup.root}>
-          <FlowButton style={styles.toolbarGroup.flatButton} label={this.props.flow} onTouchTap={this._onFlowTouch.bind(this)} />
-          <ToolbarSeparator style={styles.toolbarGroup.separator} />
-          <AuthButton style={styles.toolbarGroup.flatButton} label={authLabel} onTouchTap={authTouch} />
-          <GithubButton style={styles.toolbarGroup.iconButton} repoUrl={this.context.repoUrl} />
+        <ToolbarGroup key={1} styles={styles.toolbarGroup.root}>
+          <FlowButton styles={styles.toolbarGroup.flatButton} label={this.props.flow} onTouchTap={this._onFlowTouch.bind(this)} />
+          <ToolbarSeparator styles={styles.toolbarGroup.separator} />
+          <AuthButton styles={styles.toolbarGroup.flatButton} label={authLabel} onTouchTap={authTouch} />
+          <GithubButton styles={styles.toolbarGroup.iconButton} repoUrl={this.context.repoUrl} />
         </ToolbarGroup>
       </Toolbar>
     );
@@ -96,13 +97,11 @@ TopBar.contextTypes = {
 TopBar.propTypes = {
   flow: React.PropTypes.string,
   itemCount: React.PropTypes.number,
-  style: React.PropTypes.object,
   updateFlow: React.PropTypes.func
 };
 
 TopBar.defaultProps = {
-  itemCount: 0,
-  style: {}
+  itemCount: 0
 };
 
 module.exports = TopBar;

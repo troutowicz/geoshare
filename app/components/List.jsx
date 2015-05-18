@@ -3,12 +3,11 @@
 const React = require('react/addons');
 const ListItem = require('./ListItem');
 const ReactCSSTransitionGroup = require('./TimeoutTransitionGroup');
-
-const mergeAndPrefix = require('../utils/stylePropable').mergeAndPrefix;
+const StyleSheet = require('react-style');
 
 class List extends React.Component {
   _getStyles() {
-    return {
+    return StyleSheet.create({
       root: {
         listStyleType: 'none',
         padding: '8px 0',
@@ -34,14 +33,14 @@ class List extends React.Component {
           }
         }
       }
-    };
+    });
   }
 
   render() {
     let styles = this._getStyles();
 
     return (
-      <ul style={mergeAndPrefix(styles.root, this.props.style)}>
+      <ul styles={[styles.root, this.props.styles]}>
         <ReactCSSTransitionGroup
           enterTimeout={1000}
           leaveTimeout={0}

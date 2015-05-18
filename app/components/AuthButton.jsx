@@ -2,14 +2,15 @@
 
 const React = require('react');
 const FlatButton = require('material-ui/lib/flat-button');
+const StyleSheet = require('react-style');
 
 class AuthButton extends React.Component {
   _getStyles() {
     const theme = this.context.muiTheme.component.flatButton;
 
-    return {
+    return StyleSheet.create({
       hoverColor: theme.hoverColor
-    };
+    });
   }
 
   render() {
