@@ -1,9 +1,8 @@
 'use strict';
 
-const React = require('react');
-const ToolbarTitle = require('material-ui/lib/toolbar/toolbar-title');
-
-const transitions = require('material-ui/lib/styles/transitions');
+import React from 'react';
+import transitions from 'material-ui/lib/styles/transitions';
+import { ToolbarTitle } from 'material-ui/lib/toolbar';
 
 class Title extends React.Component {
   constructor(props) {
@@ -53,4 +52,4 @@ Title.propTypes = {
   text: React.PropTypes.string
 };
 
-module.exports = Title;
+export default Title;

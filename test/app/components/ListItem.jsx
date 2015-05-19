@@ -1,15 +1,14 @@
 'use strict';
 
-const React = require('react/addons');
+import React from 'react/addons';
+import sinon from 'sinon';
+import { assert } from 'chai';
+
+import compWithContext from '../../utils/compWithContext';
+import ListItemRaw from '../../../app/components/ListItem';
+
+const ListItem = compWithContext(ListItemRaw);
 const TestUtils = React.addons.TestUtils;
-
-const assert = require('chai').assert;
-const sinon = require('sinon');
-
-const compWithContext = require('../../utils/compWithContext');
-const ListItem = compWithContext(
-  require('../../../app/components/ListItem')
-);
 
 describe('ListItem component', function () {
   it('should embed children elements', function () {

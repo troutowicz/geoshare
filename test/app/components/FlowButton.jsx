@@ -1,15 +1,14 @@
 'use strict';
 
-const React = require('react/addons');
+import React from 'react/addons';
+import sinon from 'sinon';
+import { assert } from 'chai';
+
+import compWithContext from '../../utils/compWithContext';
+import FlowButtonRaw from '../../../app/components/FlowButton';
+
+const FlowButton = compWithContext(FlowButtonRaw);
 const TestUtils = React.addons.TestUtils;
-
-const assert = require('chai').assert;
-const sinon = require('sinon');
-
-const compWithContext = require('../../utils/compWithContext');
-const FlowButton = compWithContext(
-  require('../../../app/components/FlowButton')
-);
 
 describe('FlowButton component', function () {
   it('should set value using label property', function () {

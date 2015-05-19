@@ -1,17 +1,19 @@
 'use strict';
 
-const React = require('react');
-const AltContainer = require('alt/AltContainer');
-const AppActions = require('../actions/AppActions');
-const AppStore = require('../stores/AppStore');
-const App = require('./App');
-const alt = require('../alt');
+import React from 'react';
+import alt from '../alt';
+import AltContainer from 'alt/AltContainer';
+import App from './App';
+import AppActions from '../actions/AppActions';
+import AppStore from '../stores/AppStore';
 
-const defaultTheme = require('../style/themes/default-theme');
-const ThemeManager = require('material-ui').Styles.ThemeManager;
+import theme from '../style/themes/default-theme';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+
 const themeManager = new ThemeManager();
-themeManager.setTheme(defaultTheme);
+themeManager.setTheme(theme);
 
+// webpack
 require('../style/app.less');
 
 class Wrapper extends React.Component {
@@ -48,4 +50,4 @@ Wrapper.PropTypes = {
   initData: React.PropTypes.object.isRequired
 };
 
-module.exports = Wrapper;
+export default Wrapper;

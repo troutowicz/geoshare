@@ -1,10 +1,9 @@
 'use strict';
 
-const React = require('react/addons');
-const ListItem = require('./ListItem');
-const ReactCSSTransitionGroup = require('./TimeoutTransitionGroup');
-
-const mergeAndPrefix = require('../utils/stylePropable').mergeAndPrefix;
+import React from 'react';
+import ListItem from './ListItem';
+import ReactCSSTransitionGroup from './TimeoutTransitionGroup';
+import { mergeAndPrefix } from '../utils/stylePropable';
 
 class List extends React.Component {
   _getStyles() {
@@ -74,4 +73,4 @@ List.defaultProps = {
   style: {}
 }
 
-module.exports = List;
+export default List;

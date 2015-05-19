@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const sinon = require('sinon');
-const rewire = require('rewire');
+import rewire from 'rewire';
+import sinon from 'sinon';
+import { assert } from 'chai';
 
 const instagram = rewire('../../lib/instagram');
 
@@ -75,7 +75,7 @@ describe('instagram lib', function () {
   describe('recycleTokens()', function () {
     it('should unexpire applicable tokens', function () {
       const stub = sinon.stub().returns(true);
-      const restoreAddSubscription = instagram.__set__('wrapper.addSubscription', stub);
+      const restoreAddSubscription = instagram.__set__('addSubscription', stub);
       this.tokens.valid.push('abc123');
       this.tokens.expired[Date.now()] = 'def456';
       this.tokens.expired[Date.now() + 1000] = 'ghi789';

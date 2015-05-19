@@ -1,14 +1,13 @@
 'use strict';
 
-const React = require('react/addons');
+import React from 'react/addons';
+import { assert } from 'chai';
+
+import compWithContext from '../../utils/compWithContext';
+import GithubButtonRaw from '../../../app/components/GithubButton';
+
+const GithubButton = compWithContext(GithubButtonRaw);
 const TestUtils = React.addons.TestUtils;
-
-const assert = require('chai').assert;
-
-const compWithContext = require('../../utils/compWithContext');
-const GithubButton = compWithContext(
-  require('../../../app/components/GithubButton')
-);
 
 describe('GithubButton component', function () {
   it('should set href using repoUrl property', function() {

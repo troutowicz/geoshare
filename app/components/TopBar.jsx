@@ -1,11 +1,11 @@
 'use strict';
 
-const React = require('react');
-const AuthButton = require('./AuthButton');
-const FlowButton = require('./FlowButton');
-const GithubButton = require('./GithubButton');
-const Title = require('./Title');
-const { Toolbar, ToolbarGroup, ToolbarSeparator } = require('material-ui/lib/toolbar');
+import React from 'react';
+import AuthButton from './AuthButton';
+import FlowButton from './FlowButton';
+import GithubButton from './GithubButton';
+import Title from './Title';
+import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/lib/toolbar';
 
 class TopBar extends React.Component {
   _getStyles() {
@@ -105,4 +105,4 @@ TopBar.defaultProps = {
   style: {}
 };
 
-module.exports = TopBar;
+export default TopBar;

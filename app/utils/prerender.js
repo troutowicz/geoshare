@@ -1,11 +1,13 @@
 'use strict';
 
-const React = require('react');
-const Iso = require('iso');
-const html = require('../index.html');
-const Wrapper = require('../components/Wrapper');
+import React from  'react';
+import Iso from 'iso';
+import Wrapper from '../components/Wrapper';
 
-const prerender = (initData, scriptUrl, styleUrl, callback) => {
+// webpack
+import html from '../index.html';
+
+export default (initData, scriptUrl, styleUrl, callback) => {
   const Component = React.createElement(Wrapper, { initData });
 
   // format the full page
@@ -22,5 +24,3 @@ const prerender = (initData, scriptUrl, styleUrl, callback) => {
     )
   );
 };
-
-module.exports = prerender;

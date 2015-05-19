@@ -1,7 +1,7 @@
 'use strict';
 
-const React = require('react');
-const IconButton = require('material-ui/lib/icon-button');
+import React from 'react';
+import IconButton from 'material-ui/lib/icon-button';
 
 class GithubButton extends React.Component {
   _getStyle() {
@@ -45,4 +45,4 @@ GithubButton.defaultProps = {
   style: {}
 }
 
-module.exports = GithubButton;
+export default GithubButton;
