@@ -1,9 +1,8 @@
 'use strict';
 
-const sinon = require('sinon');
-const assert = require('chai').assert;
-
-const Db = require('../../lib/db');
+import * as db from '../../lib/db';
+import sinon from 'sinon';
+import { assert } from 'chai';
 
 describe('db lib', function () {
   describe('addUser()', function () {
@@ -43,7 +42,7 @@ describe('db lib', function () {
       sinon.stub(client, 'sismember').yields(null, true);
       sinon.stub(client, 'hgetall').yields(null, this.testUser);
 
-      Db.addUser(client, this.data, (err, user) => {
+      db.addUser(client, this.data, (err, user) => {
         assert.deepEqual(this.testUser, user);
 
         done();
@@ -61,7 +60,7 @@ describe('db lib', function () {
       sinon.stub(client, 'hmset').yields(null);
       sinon.stub(client, 'sadd').returns(true);
 
-      Db.addUser(client, this.data, (err, user) => {
+      db.addUser(client, this.data, (err, user) => {
         assert.deepEqual(this.testUser, user);
 
         done();
@@ -80,7 +79,7 @@ describe('db lib', function () {
       sinon.stub(client, 'del').yields(null);
       sinon.stub(client, 'srem').returns(true);
 
-      Db.deleteUser(client, token, (err) => {
+      db.deleteUser(client, token, (err) => {
         assert.ok(!err);
 
         done();
@@ -96,7 +95,7 @@ describe('db lib', function () {
 
       sinon.stub(client, 'smembers').yields(null, {});
 
-      Db.getTokens(client, (err, tokens) => {
+      db.getTokens(client, (err, tokens) => {
         assert.deepEqual({}, tokens);
 
         done();

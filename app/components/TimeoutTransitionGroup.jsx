@@ -16,7 +16,7 @@
  * addons and under the Apache 2.0 License.
  */
 
-const React = require('react/addons');
+import React from 'react/addons';
 const ReactTransitionGroup = React.addons.TransitionGroup;
 
 const TICK = 17;
@@ -233,4 +233,4 @@ TimeoutTransitionGroup.defaultProps = {
   transitionLeave: true
 };
 
-module.exports = TimeoutTransitionGroup;
+export default TimeoutTransitionGroup;

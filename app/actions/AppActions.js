@@ -1,9 +1,11 @@
 'use strict';
 
-const isBrowser = typeof window !== 'undefined';
+import alt from '../alt';
+import io from 'socket.io-client';
 
-const alt = require('../alt');
-const socket = isBrowser ? require('socket.io-client')() : undefined;
+if (typeof window !== 'undefined') {
+  var socket = io();
+}
 
 class AppActions {
   constructor() {
@@ -25,4 +27,4 @@ class AppActions {
   }
 }
 
-module.exports = alt.createActions(AppActions);
+export default alt.createActions(AppActions);

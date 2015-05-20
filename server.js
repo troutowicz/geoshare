@@ -1,18 +1,20 @@
 'use strict';
 
-require('babel/polyfill');
+import config from 'config';
+import Hapi from 'hapi';
+import Redis from 'redis';
+import * as services from './lib/services';
+import SocketIO from 'socket.io';
+import { getTokens } from './lib/db';
+import {
+  addSubscription,
+  deleteSubscription,
+  setValidTokens
+} from './lib/instagram';
 
-module.exports = (options) => {
-  const Hapi = require('hapi');
-  const SocketIO = require('socket.io');
-  const Redis = require('redis');
-  const config = require('config');
-  const services = require('./lib/services');
-  const db = require('./lib/db');
-  const instagram = require('./lib/instagram');
+const server = new Hapi.Server();
 
-  const server = new Hapi.Server();
-
+export default (options) => {
   server.connection({
     host: config.get('Web.host'),
     port: config.get('Web.port')
@@ -115,7 +117,7 @@ module.exports = (options) => {
       {
         taskname: 'shutdown',
         task: () => {
-          instagram.deleteSubscription((err) => {
+          deleteSubscription((err) => {
             if (err) {
               throw err;
             }
@@ -167,13 +169,13 @@ module.exports = (options) => {
       const client = Redis.createClient();
       server.app.client = client;
 
-      db.getTokens(client, (err, tokens) => {
+      getTokens(client, (err, tokens) => {
         if (err) {
           throw err;
         }
 
-        instagram.setValidTokens(tokens);
-        instagram.addSubscription((err) => {
+        setValidTokens(tokens);
+        addSubscription((err) => {
           if (err) {
             throw err;
           }

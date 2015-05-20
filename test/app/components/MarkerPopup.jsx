@@ -1,11 +1,11 @@
 'use strict';
 
-const React = require('react/addons');
+import React from 'react/addons';
+import { assert } from 'chai';
+
+import MarkerPopup from '../../../app/components/MarkerPopup';
+
 const TestUtils = React.addons.TestUtils;
-
-const assert = require('chai').assert;
-
-const MarkerPopup = require('../../../app/components/MarkerPopup');
 
 describe('MarkerPopup component', function () {
   it('should set profile link using profileUrl property', function() {

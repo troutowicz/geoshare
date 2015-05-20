@@ -1,7 +1,7 @@
 'use strict';
 
-const alt = require('../alt');
-const AppActions = require('../actions/AppActions');
+import alt from '../alt';
+import AppActions from '../actions/AppActions';
 
 class AppStore {
   constructor() {
@@ -46,4 +46,4 @@ class AppStore {
   }
 }
 
-module.exports = alt.createStore(AppStore, 'AppStore');
+export default alt.createStore(AppStore, 'AppStore');

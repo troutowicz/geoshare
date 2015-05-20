@@ -1,10 +1,10 @@
 'use strict';
 
-const React = require('react');
-const Leaflet = require('leaflet');
-const MapLayer = require('react-leaflet').MapLayer;
-const MarkerPopup = require('./MarkerPopup');
-require('leaflet.markercluster');
+import React from 'react';
+import Leaflet from 'leaflet';
+import leafletMarkercluster from 'leaflet.markercluster';
+import MarkerPopup from './MarkerPopup';
+import { MapLayer } from 'react-leaflet';
 
 class MarkerCluster extends MapLayer {
   componentWillMount() {
@@ -78,4 +78,4 @@ MarkerCluster.defaultProps = {
   focusMarker: {}
 };
 
-module.exports = MarkerCluster;
+export default MarkerCluster;

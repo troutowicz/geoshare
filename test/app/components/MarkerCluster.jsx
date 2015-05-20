@@ -1,13 +1,13 @@
 'use strict';
 
-const React = require('react/addons');
+import React from 'react/addons';
+import { assert } from 'chai';
+
+import MarkerCluster from '../../../app/components/MarkerCluster';
+import MyMap from '../../../app/components/Map';
+import { Map } from 'react-leaflet';
+
 const TestUtils = React.addons.TestUtils;
-
-const assert = require('chai').assert;
-
-const { Map } = require('react-leaflet');
-const MyMap = require('../../../app/components/Map');
-const MarkerCluster = require('../../../app/components/MarkerCluster');
 
 describe('MarkerCluster component', function () {
   it('should add a marker for every property in newMarkerData property', function () {

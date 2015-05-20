@@ -1,17 +1,17 @@
 'use strict';
 
-const React = require('react/addons');
-const TestUtils = React.addons.TestUtils;
-const assert = require('chai').assert;
+import React from 'react/addons';
+import { assert } from 'chai';
 
-const compWithContext = require('../../utils/compWithContext');
-const TopBar = compWithContext(
-  require('../../../app/components/TopBar')
-);
-const Title = require('../../../app/components/Title')
-const FlowButton = require('../../../app/components/FlowButton');
-const AuthButton = require('../../../app/components/AuthButton');
-const GithubButton = require('../../../app/components/GithubButton');
+import compWithContext from '../../utils/compWithContext';
+import AuthButton from '../../../app/components/AuthButton';
+import FlowButton from '../../../app/components/FlowButton';
+import GithubButton from '../../../app/components/GithubButton';
+import Title from '../../../app/components/Title';
+import TopBarRaw from '../../../app/components/TopBar';
+
+const TopBar = compWithContext(TopBarRaw);
+const TestUtils = React.addons.TestUtils;
 
 describe('TopBar component', function () {
   before(function() {

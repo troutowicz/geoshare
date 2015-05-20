@@ -1,7 +1,7 @@
 'use strict';
 
-const React = require('react');
-const FlatButton = require('material-ui/lib/flat-button');
+import React from 'react';
+import FlatButton from 'material-ui/lib/flat-button';
 
 class FlowButton extends React.Component {
   _getStyles() {
@@ -39,4 +39,4 @@ FlowButton.defaultProps = {
   style: {}
 };
 
-module.exports = FlowButton;
+export default FlowButton;

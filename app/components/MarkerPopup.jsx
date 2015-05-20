@@ -1,6 +1,6 @@
 'use strict';
 
-const React = require('react');
+import React from 'react';
 
 class MarkerPopup extends React.Component {
   _getStyles() {
@@ -36,4 +36,4 @@ MarkerPopup.propTypes = {
   profileUrl: React.PropTypes.string,
 };
 
-module.exports = MarkerPopup;
+export default MarkerPopup;

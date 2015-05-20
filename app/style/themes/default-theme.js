@@ -1,10 +1,10 @@
 'use strict';
 
-const colors = require('material-ui/lib/styles/colors');
-const colorManipulator = require('material-ui/lib/utils/color-manipulator');
-const spacing = require('material-ui/lib/styles/spacing');
+import colors from 'material-ui/lib/styles/colors';
+import colorManipulator from 'material-ui/lib/utils/color-manipulator';
+import spacing from 'material-ui/lib/styles/spacing';
 
-const DefaultTheme = {
+export default {
   spacing: spacing,
   contentFontFamily: 'Roboto, sans-serif',
   getPalette() {
@@ -46,5 +46,3 @@ const DefaultTheme = {
     return obj;
   }
 };
-
-module.exports = DefaultTheme;

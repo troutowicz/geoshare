@@ -1,11 +1,12 @@
 'use strict';
 
-const React = require('react/addons');
-const TestUtils = React.addons.TestUtils;
-const assert = require('chai').assert;
-const sinon = require('sinon');
+import React from 'react/addons';
+import sinon from 'sinon';
+import { assert } from 'chai';
 
-const ReactCSSTransitionGroup = require('../../../app/components/TimeoutTransitionGroup');
+import ReactCSSTransitionGroup from '../../../app/components/TimeoutTransitionGroup';
+
+const TestUtils = React.addons.TestUtils;
 
 describe('TimeoutTransitionGroup component', function () {
   before(function () {

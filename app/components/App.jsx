@@ -1,15 +1,20 @@
 'use strict';
 
 const isBrowser = typeof window !== 'undefined';
-const socket = isBrowser ? require('socket.io-client')() : undefined;
-
-const React = require('react');
-const List = require('./List');
+// TODO how to handle the es6 way?
 const Map = isBrowser ? require('./Map'): undefined;
-const Snackbar = require('material-ui/lib/snackbar');
-const TopBar = require('./TopBar');
 
-const InjectTapEventPlugin = require('react-tap-event-plugin');
+import React from 'react';
+import InjectTapEventPlugin from 'react-tap-event-plugin';
+import List from './List';
+import Snackbar from 'material-ui/lib/snackbar';
+import TopBar from './TopBar';
+import io from 'socket.io-client';
+
+if (isBrowser) {
+  var socket = io();
+}
+
 new InjectTapEventPlugin();
 
 class App extends React.Component {
@@ -106,4 +111,4 @@ App.contextTypes = {
   muiTheme: React.PropTypes.object
 };
 
-module.exports = App;
+export default App;

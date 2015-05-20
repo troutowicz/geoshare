@@ -1,9 +1,8 @@
 'use strict';
 
-const React = require('react');
-const LeafletMap = require('react-leaflet').Map;
-const MarkerCluster = require('./MarkerCluster');
-const TileLayer = require('react-leaflet').TileLayer;
+import React from 'react';
+import MarkerCluster from './MarkerCluster';
+import { Map as LeafletMap, TileLayer } from 'react-leaflet';
 
 class Map extends React.Component {
   render() {
@@ -53,4 +52,4 @@ Map.defaultProps = {
   zoom: 3
 };
 
-module.exports = Map;
+export default Map;

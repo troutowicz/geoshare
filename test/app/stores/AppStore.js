@@ -1,8 +1,7 @@
 'use strict';
 
-const assert = require('chai').assert;
-
-const AppStore = require('../../../app/stores/AppStore');
+import AppStore from '../../../app/stores/AppStore';
+import { assert } from 'chai';
 
 describe('AppStore', function () {
   before(function () {

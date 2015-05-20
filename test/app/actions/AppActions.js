@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const sinon = require('sinon');
-const rewire = require('rewire');
+import rewire from 'rewire';
+import sinon from 'sinon';
+import { assert } from 'chai';
 
 const AppActions = rewire('../../../app/actions/AppActions');
 

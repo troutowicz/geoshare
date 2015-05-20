@@ -1,15 +1,14 @@
 'use strict';
 
-const React = require('react/addons');
+import React from 'react/addons';
+import { assert } from 'chai';
+
+import compWithContext from '../../utils/compWithContext';
+import ListItem from '../../../app/components/ListItem';
+import ListRaw from '../../../app/components/List';
+
+const List = compWithContext(ListRaw);
 const TestUtils = React.addons.TestUtils;
-
-const assert = require('chai').assert;
-
-const compWithContext = require('../../utils/compWithContext');
-const List = compWithContext(
-  require('../../../app/components/List')
-);
-const ListItem = require('../../../app/components/ListItem');
 
 describe('List component', function () {
   it('should embed ListItem component for each item in itemData property', function () {

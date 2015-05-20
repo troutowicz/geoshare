@@ -1,13 +1,13 @@
 'use strict';
 
-const React = require('react');
+import React from 'react';
+import theme from '../../app/style/themes/default-theme';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
 
-const defaultTheme = require('../../app/style/themes/default-theme');
-const ThemeManager = require('material-ui/lib/styles/theme-manager');
 const themeManager = new ThemeManager();
-themeManager.setTheme(defaultTheme);
+themeManager.setTheme(theme);
 
-const compWithContext = (Component) => {
+export default (Component) => {
   class CompWithContext extends React.Component {
     getChildContext() {
       return {
@@ -26,5 +26,3 @@ const compWithContext = (Component) => {
 
   return CompWithContext;
 };
-
-module.exports = compWithContext;

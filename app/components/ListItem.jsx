@@ -1,11 +1,10 @@
 'use strict';
 
-const React = require('react');
-const Paper = require('material-ui/lib/paper');
-
-const mergeAndPrefix = require('../utils/stylePropable').mergeAndPrefix;
-const transitions = require('material-ui/lib/styles/transitions');
-const typography = require('material-ui/lib/styles/typography');
+import React from 'react';
+import Paper from 'material-ui/lib/paper';
+import transitions from 'material-ui/lib/styles/transitions';
+import typography from 'material-ui/lib/styles/typography';
+import { mergeAndPrefix } from '../utils/stylePropable';
 
 class ListItem extends React.Component {
   constructor(props) {
@@ -135,4 +134,4 @@ ListItem.defaultProps = {
   description: ''
 };
 
-module.exports = ListItem;
+export default ListItem;
