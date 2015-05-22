@@ -1,13 +1,13 @@
-'use strict';
-
-import React from 'react/addons';
+import React from 'react';
 import { assert } from 'chai';
-
-import MarkerCluster from '../../../app/components/MarkerCluster';
-import MyMap from '../../../app/components/Map';
 import { Map, TileLayer } from 'react-leaflet';
 
-const TestUtils = React.addons.TestUtils;
+import mapFactory from '../../../app/components/Map';
+import markerClusterFactory from '../../../app/components/MarkerCluster';
+import TestUtils from '../../utils/testUtils';
+
+const MyMap = mapFactory(React);
+const MarkerCluster = markerClusterFactory(React);
 
 describe('Map component', function () {
   it('should be centered at value of center property', function () {

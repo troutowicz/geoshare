@@ -1,28 +1,24 @@
-'use strict';
-
-import React from 'react';
+import stampit from 'react-stampit';
 import theme from '../../app/style/themes/default-theme';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import themeManager from 'material-ui/lib/styles/theme-manager';
 
-const themeManager = new ThemeManager();
-themeManager.setTheme(theme);
+const themeMgr = themeManager();
+themeMgr.setTheme(theme);
 
-export default (Component) => {
-  class CompWithContext extends React.Component {
+export default (React, Component) => {
+  return stampit(React, {
+    childContextTypes: {
+      muiTheme: React.PropTypes.object,
+    },
+
     getChildContext() {
       return {
-        muiTheme: themeManager.getCurrentTheme(),
+        muiTheme: themeMgr,
       };
-    }
+    },
 
     render() {
       return React.createElement(Component, this.props);
-    }
-  }
-
-  CompWithContext.childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  };
-
-  return CompWithContext;
+    },
+  });
 };

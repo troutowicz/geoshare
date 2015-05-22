@@ -1,12 +1,10 @@
-'use strict';
-
 import React from 'react/addons';
 import { assert } from 'chai';
 
 import compWithContext from '../../utils/compWithContext';
-import GithubButtonRaw from '../../../app/components/GithubButton';
+import githubButtonFactory from '../../../app/components/GithubButton';
 
-const GithubButton = compWithContext(GithubButtonRaw);
+const GithubButton = compWithContext(React, githubButtonFactory(React));
 const TestUtils = React.addons.TestUtils;
 
 describe('GithubButton component', function () {

@@ -1,15 +1,12 @@
-'use strict';
-
 import React from 'react/addons';
 import sinon from 'sinon';
 import { assert } from 'chai';
 
 import compWithContext from '../../utils/compWithContext';
-import AuthButtonRaw from '../../../app/components/AuthButton';
+import authButtonFactory from '../../../app/components/AuthButton';
 
-const AuthButton = compWithContext(AuthButtonRaw);
+const AuthButton = compWithContext(React, authButtonFactory(React));
 const TestUtils = React.addons.TestUtils;
-
 
 describe('AuthButton component', function () {
   it('should set value using label property', function() {

@@ -1,5 +1,3 @@
-'use strict';
-
 import colors from 'material-ui/lib/styles/colors';
 import colorManipulator from 'material-ui/lib/utils/color-manipulator';
 import spacing from 'material-ui/lib/styles/spacing';

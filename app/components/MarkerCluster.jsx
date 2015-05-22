@@ -1,83 +1,81 @@
-'use strict';
-
-import React from 'react';
 import Leaflet from 'leaflet';
-import MarkerPopup from './MarkerPopup';
-import { MapLayer } from 'react-leaflet';
-
+import stampit from 'react-stampit';
 require('leaflet.markercluster');
 
-class MarkerCluster extends MapLayer {
-  componentWillMount() {
-    super.componentWillMount();
+import leafletMap from './lib/leafletMap';
+import leafletUtil from './lib/leafletUtil';
+import markerPopupFactory from './MarkerPopup';
 
-    this.leafletElement = Leaflet.markerClusterGroup();
-  }
+export default React => {
+  const MarkerPopup = markerPopupFactory(React);
 
-  componentWillReceiveProps(nextProps) {
-    super.componentWillReceiveProps(nextProps);
+  return stampit(React, {
+    displayName: 'MarkerCluster',
 
-    // add markers to cluster layer
-    if (nextProps.newMarkerData.length > 0) {
-      let markers = Object.assign({}, this.props.markers);
-      let newMarkers = [];
+    propTypes: {
+      focusMarker: React.PropTypes.object,
+      markers: React.PropTypes.object,
+      newMarkerData: React.PropTypes.array,
+      updateMarkers: React.PropTypes.func,
+    },
 
-      nextProps.newMarkerData.forEach((obj) => {
-        let markerPopup = React.renderToStaticMarkup(
-          <MarkerPopup
-            caption={obj.caption}
-            imgUrl={obj.imgUrl}
-            profileUrl={obj.profileUrl}
-          />
-        );
+    defaultProps: {
+      markers: {},
+      newMarkerData: [],
+      focusMarker: {},
+    },
 
-        let leafletMarker = Leaflet.marker(obj.latLng)
-          .bindPopup(markerPopup, {maxHeight: 350, maxWidth: 250, minWidth: 250})
-          .on('click', () => this.props.map.panTo(obj.latLng));
+    componentWillMount() {
+      this.leafletElement = Leaflet.markerClusterGroup();
+    },
 
-        markers[obj.id] = leafletMarker;
-        newMarkers.push(leafletMarker);
-      });
+    componentWillReceiveProps(nextProps) {
+      // add markers to cluster layer
+      if (nextProps.newMarkerData.length > 0) {
+        let markers = Object.assign({}, this.props.markers);
+        let newMarkers = [];
 
-      this.leafletElement.addLayers(newMarkers);
+        nextProps.newMarkerData.forEach((obj) => {
+          let markerPopup = React.renderToStaticMarkup(
+            <MarkerPopup
+              caption={obj.caption}
+              imgUrl={obj.imgUrl}
+              profileUrl={obj.profileUrl}
+            />
+          );
 
-      setTimeout(() => {
-        this.props.updateMarkers(markers);
-      }, 0);
-    }
+          let leafletMarker = Leaflet.marker(obj.latLng)
+            .bindPopup(markerPopup, {maxHeight: 350, maxWidth: 250, minWidth: 250})
+            .on('click', () => this.props.map.panTo(obj.latLng));
 
-    // zoom to particular marker
-    if (Object.keys(nextProps.focusMarker).length > 0) {
-      let marker = this.props.markers[nextProps.focusMarker.id];
+          markers[obj.id] = leafletMarker;
+          newMarkers.push(leafletMarker);
+        });
 
-      this.leafletElement.zoomToShowLayer(marker, () => {
-        this.props.map.panTo(nextProps.focusMarker.latLng);
-        marker.openPopup();
-      });
-    }
-  }
+        this.leafletElement.addLayers(newMarkers);
 
-  shouldComponentUpdate() {
-    return false;
-  }
+        setTimeout(() => {
+          this.props.updateMarkers(markers);
+        }, 0);
+      }
 
-  render() {
-    return null;
-  }
-}
+      // zoom to particular marker
+      if (Object.keys(nextProps.focusMarker).length > 0) {
+        let marker = this.props.markers[nextProps.focusMarker.id];
 
-MarkerCluster.propTypes = {
-  focusMarker: React.PropTypes.object,
-  map: React.PropTypes.object,
-  markers: React.PropTypes.object,
-  newMarkerData: React.PropTypes.array,
-  updateMarkers: React.PropTypes.func,
+        this.leafletElement.zoomToShowLayer(marker, () => {
+          this.props.map.panTo(nextProps.focusMarker.latLng);
+          marker.openPopup();
+        });
+      }
+    },
+
+    shouldComponentUpdate() {
+      return false;
+    },
+
+    render() {
+      return null;
+    },
+  }).compose(leafletUtil, leafletMap);
 };
-
-MarkerCluster.defaultProps = {
-  markers: {},
-  newMarkerData: [],
-  focusMarker: {},
-};
-
-export default MarkerCluster;

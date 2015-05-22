@@ -1,13 +1,11 @@
-'use strict';
-
 import React from 'react/addons';
 import sinon from 'sinon';
 import { assert } from 'chai';
 
 import compWithContext from '../../utils/compWithContext';
-import ListItemRaw from '../../../app/components/ListItem';
+import listItemFactory from '../../../app/components/ListItem';
 
-const ListItem = compWithContext(ListItemRaw);
+const ListItem = compWithContext(React, listItemFactory(React));
 const TestUtils = React.addons.TestUtils;
 
 describe('ListItem component', function () {

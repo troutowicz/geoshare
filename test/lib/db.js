@@ -1,5 +1,3 @@
-'use strict';
-
 import * as db from '../../lib/db';
 import sinon from 'sinon';
 import { assert } from 'chai';

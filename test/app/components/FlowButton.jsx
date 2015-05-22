@@ -1,13 +1,11 @@
-'use strict';
-
 import React from 'react/addons';
 import sinon from 'sinon';
 import { assert } from 'chai';
 
 import compWithContext from '../../utils/compWithContext';
-import FlowButtonRaw from '../../../app/components/FlowButton';
+import flowButtonFactory from '../../../app/components/FlowButton';
 
-const FlowButton = compWithContext(FlowButtonRaw);
+const FlowButton = compWithContext(React, flowButtonFactory(React));
 const TestUtils = React.addons.TestUtils;
 
 describe('FlowButton component', function () {

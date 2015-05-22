@@ -1,8 +1,8 @@
-'use strict';
-
 import React from 'react';
 import Iso from 'iso';
-import Wrapper from './components/Wrapper';
+import wrapperFactory from './components/Wrapper';
+
+const Wrapper = wrapperFactory(React);
 
 require('babel/polyfill');
 

@@ -1,11 +1,11 @@
-'use strict';
-
 import React from 'react';
 import Iso from 'iso';
-import Wrapper from '../components/Wrapper';
+import wrapperFactory from '../components/Wrapper';
 
 // webpack
 import html from '../index.html';
+
+const Wrapper = wrapperFactory(React);
 
 export default (initData, scriptUrl, styleUrl, callback) => {
   const Component = React.createElement(Wrapper, { initData });

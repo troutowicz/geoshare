@@ -1,16 +1,18 @@
-'use strict';
-
 import React from 'react/addons';
 import { assert } from 'chai';
 
 import compWithContext from '../../utils/compWithContext';
-import AuthButton from '../../../app/components/AuthButton';
-import FlowButton from '../../../app/components/FlowButton';
-import GithubButton from '../../../app/components/GithubButton';
-import Title from '../../../app/components/Title';
-import TopBarRaw from '../../../app/components/TopBar';
+import authButtonFactory from '../../../app/components/AuthButton';
+import flowButtonFactory from '../../../app/components/FlowButton';
+import githubButtonFactory from '../../../app/components/GithubButton';
+import titleFactory from '../../../app/components/Title';
+import topBarFactory from '../../../app/components/TopBar';
 
-const TopBar = compWithContext(TopBarRaw);
+const AuthButton = authButtonFactory(React);
+const FlowButton = flowButtonFactory(React);
+const GithubButton = githubButtonFactory(React);
+const Title = titleFactory(React);
+const TopBar = compWithContext(React, topBarFactory(React));
 const TestUtils = React.addons.TestUtils;
 
 describe('TopBar component', function () {
