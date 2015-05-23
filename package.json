@@ -46,7 +46,7 @@
     "leaflet.markercluster": "Leaflet/Leaflet.markercluster#v0.4.0-hotfix.1",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
-    "material-ui": "callemall/material-ui#1a8fbf3f7ab8a3e504031f8f150929c1b471c9f1",
+    "material-ui": "callemall/material-ui#92bae5dd6c03faa78e82f87589294398fffdc232",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
     "react-leaflet": "^0.6.1",
