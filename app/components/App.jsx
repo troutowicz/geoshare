@@ -2,20 +2,21 @@
 
 const isBrowser = typeof window !== 'undefined';
 // TODO how to handle the es6 way?
-const Map = isBrowser ? require('./Map'): undefined;
+const GeoMap = isBrowser ? require('./Map') : undefined;
 
 import React from 'react';
-import InjectTapEventPlugin from 'react-tap-event-plugin';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import List from './List';
 import Snackbar from 'material-ui/lib/snackbar';
 import TopBar from './TopBar';
 import io from 'socket.io-client';
 
+let socket;
 if (isBrowser) {
-  var socket = io();
+  socket = io();
 }
 
-new InjectTapEventPlugin();
+injectTapEventPlugin();
 
 class App extends React.Component {
   componentDidMount() {
@@ -29,7 +30,7 @@ class App extends React.Component {
         fontFamily: this.context.muiTheme.contentFontFamily,
         fontSize: '13px',
         lineHeight: '20px',
-        'WebkitFontSmoothing': 'antialiased'
+        WebkitFontSmoothing: 'antialiased',
       },
       list: {
         position: 'absolute',
@@ -38,15 +39,15 @@ class App extends React.Component {
         right: '0',
         width: '290px',
         overflow: 'hidden',
-        overflowY: 'scroll'
+        overflowY: 'scroll',
       },
       map: {
         position: 'absolute',
         top: '56px',
         bottom: '0',
         left: '0',
-        right: '290px'
-      }
+        right: '290px',
+      },
     };
   }
 
@@ -69,7 +70,7 @@ class App extends React.Component {
 
     if (isBrowser) {
       map = (
-        <Map
+        <GeoMap
           focusMarker={this.props.focusMarker}
           markers={this.props.markers}
           newMarkerData={this.props.newImageData}
@@ -82,14 +83,14 @@ class App extends React.Component {
     if (this.props.timeout) {
       alert = (
         <Snackbar
-          openOnMount={true}
           message='All tokens have reached the hourly limit, consider logging in to register a token!'
+          openOnMount={true}
         />
       );
     }
 
     return (
-      <div style={styles.root} id='app-container'>
+      <div id='app-container' style={styles.root} >
         <TopBar
           flow={this.props.flow}
           itemCount={Object.keys(this.props.markers).length}
@@ -108,7 +109,21 @@ class App extends React.Component {
 }
 
 App.contextTypes = {
-  muiTheme: React.PropTypes.object
+  muiTheme: React.PropTypes.object,
+};
+
+App.propTypes = {
+  flow: React.PropTypes.string,
+  focusMarker: React.PropTypes.object,
+  imageData: React.PropTypes.array,
+  markers: React.PropTypes.object,
+  newImageData: React.PropTypes.object,
+  timeout: React.PropTypes.bool,
+  updateFlow: React.PropTypes.func,
+  updateFocusedMarker: React.PropTypes.func,
+  updateInstaData: React.PropTypes.func,
+  updateMarkers: React.PropTypes.func,
+  updateTimeout: React.PropTypes.func,
 };
 
 export default App;

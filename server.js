@@ -17,28 +17,32 @@ const server = new Hapi.Server();
 export default (options) => {
   server.connection({
     host: config.get('Web.host'),
-    port: config.get('Web.port')
+    port: config.get('Web.port'),
   });
 
-  server.register([
-    {
-      register: require('hapi-auth-cookie')
-    },
-    {
-      register: require('good'),
-      options: {
-        reporters: [{
-          reporter: require('good-console'),
-          events: { log: '*' }
-        }]
-      }
-    },
-    {
-      register: require('hapi-shutdown'),
-      options: {
-        serverSpindownTime: 10000
-      }
-    }],
+  server.register(
+    [
+      {
+        register: require('hapi-auth-cookie'),
+      },
+      {
+        register: require('good'),
+        options: {
+          reporters: [
+            {
+              reporter: require('good-console'),
+              events: { log: '*' },
+            },
+          ],
+        },
+      },
+      {
+        register: require('hapi-shutdown'),
+        options: {
+          serverSpindownTime: 10000,
+        },
+      },
+    ],
     err => {
       if (err) {
         throw err;
@@ -48,7 +52,7 @@ export default (options) => {
         password: config.get('Web.cookie'),
         cookie: 'sid',
         isSecure: false,
-        clearInvalid: true
+        clearInvalid: true,
       });
     }
   );
@@ -59,9 +63,9 @@ export default (options) => {
     handler: {
       directory: {
         path: 'build/public',
-        listing: false
-      }
-    }
+        listing: false,
+      },
+    },
   });
 
   server.route({
@@ -71,15 +75,15 @@ export default (options) => {
       handler: services.index,
       auth: {
         strategy: 'session',
-        mode: 'try'
-      }
-    }
+        mode: 'try',
+      },
+    },
   });
 
   server.route({
     method: 'GET',
     path: '/auth',
-    handler: services.auth
+    handler: services.auth,
   });
 
   server.route({
@@ -89,21 +93,21 @@ export default (options) => {
       handler: services.handleAuth,
       auth: {
         strategy: 'session',
-        mode: 'try'
-      }
-    }
+        mode: 'try',
+      },
+    },
   });
 
   server.route({
     method: 'GET',
     path: '/logout',
-    handler: services.logout
+    handler: services.logout,
   });
 
   server.route({
     method: ['GET', 'POST'],
     path: '/ig',
-    handler: services.handleSubscription
+    handler: services.handleSubscription,
   });
 
   server.start(() => {
@@ -116,14 +120,14 @@ export default (options) => {
     server.plugins['hapi-shutdown'].register(
       {
         taskname: 'shutdown',
-        task: () => {
+        task() {
           deleteSubscription((err) => {
             if (err) {
               throw err;
             }
           });
         },
-        timeout: 2000
+        timeout: 2000,
       }
     );
 
@@ -149,14 +153,16 @@ export default (options) => {
 
     if (options.testData) {
       let counter = 1;
-      setInterval (() => {
+      setInterval(() => {
         let data = {
           caption: `description ${counter}`,
           id: counter,
           latLng: [Math.random() * 180 - 90, Math.random() * 360 - 180],
           user: {
+            /* eslint-disable */
             profile_picture: '/public/user.jpg',
             full_name: `User ${counter}`,
+            /* eslint-enable */
             username: `user ${counter}`,
           },
         };

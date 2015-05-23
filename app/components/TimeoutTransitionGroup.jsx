@@ -28,20 +28,20 @@ const TICK = 17;
  */
 let EVENT_NAME_MAP = {
   transitionend: {
-    'transition': 'transitionend',
-    'WebkitTransition': 'webkitTransitionEnd',
-    'MozTransition': 'mozTransitionEnd',
-    'OTransition': 'oTransitionEnd',
-    'msTransition': 'MSTransitionEnd'
+    transition: 'transitionend',
+    WebkitTransition: 'webkitTransitionEnd',
+    MozTransition: 'mozTransitionEnd',
+    OTransition: 'oTransitionEnd',
+    msTransition: 'MSTransitionEnd',
   },
 
   animationend: {
-    'animation': 'animationend',
-    'WebkitAnimation': 'webkitAnimationEnd',
-    'MozAnimation': 'mozAnimationEnd',
-    'OAnimation': 'oAnimationEnd',
-    'msAnimation': 'MSAnimationEnd'
-  }
+    animation: 'animationend',
+    WebkitAnimation: 'webkitAnimationEnd',
+    MozAnimation: 'mozAnimationEnd',
+    OAnimation: 'oAnimationEnd',
+    msAnimation: 'MSAnimationEnd',
+  },
 };
 
 let endEvents = [];
@@ -75,7 +75,7 @@ let endEvents = [];
       }
     }
   }
-})();
+}());
 
 function animationSupported() {
   return endEvents.length !== 0;
@@ -197,10 +197,10 @@ class TimeoutTransitionGroup extends React.Component {
   _wrapChild(child) {
     return (
       <TimeoutTransitionGroupChild
-        enterTimeout={this.props.enterTimeout}
-        leaveTimeout={this.props.leaveTimeout}
         enter={this.props.transitionEnter}
+        enterTimeout={this.props.enterTimeout}
         leave={this.props.transitionLeave}
+        leaveTimeout={this.props.leaveTimeout}
         style={this.props.style}
       >
         {child}
@@ -209,7 +209,9 @@ class TimeoutTransitionGroup extends React.Component {
   }
 
   render() {
+    /* eslint-disable */
     const {style, ...props} = this.props;
+    /* eslint-enable */
 
     return (
       <ReactTransitionGroup
@@ -230,7 +232,7 @@ TimeoutTransitionGroup.propTypes = {
 
 TimeoutTransitionGroup.defaultProps = {
   transitionEnter: true,
-  transitionLeave: true
+  transitionLeave: true,
 };
 
 export default TimeoutTransitionGroup;

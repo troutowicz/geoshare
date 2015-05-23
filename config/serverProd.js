@@ -2,5 +2,5 @@
 
 require('../server')({
   testData: false,
-  separateStylesheet: true
+  separateStylesheet: true,
 });

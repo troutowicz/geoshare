@@ -14,7 +14,7 @@ class TopBar extends React.Component {
     return {
       root: {
         borderBottom: `1px solid ${theme.borderColor}`,
-        boxShadow: '0px 1px 6px rgba(0, 0, 0, 0.12)'
+        boxShadow: '0px 1px 6px rgba(0, 0, 0, 0.12)',
       },
       hashtag: {
         position: 'absolute',
@@ -27,27 +27,31 @@ class TopBar extends React.Component {
       },
       toolbarGroup: {
         root: {
-          float: 'right'
+          float: 'right',
         },
         flatButton: {
           bottom: '1px',
-          margin: '0 24px'
+          margin: '0 24px',
         },
         iconButton: {
           top: '4px',
-          margin: '0 -12px'
+          margin: '0 -12px',
         },
         separator: {
           float: 'none',
-          marginLeft: 'auto'
-        }
-      }
+          marginLeft: 'auto',
+        },
+      },
     };
   }
 
-  _onLoginTouch() { window.location.href = '/auth'; }
+  _onLoginTouch() {
+    window.location.href = '/auth';
+  }
 
-  _onLogoutTouch() { window.location.href = '/logout'; }
+  _onLogoutTouch() {
+    window.location.href = '/logout';
+  }
 
   _onFlowTouch() {
     this.props.updateFlow(this.props.flow);
@@ -76,10 +80,10 @@ class TopBar extends React.Component {
           {hashtag}
         </div>
         <ToolbarGroup key={1} style={styles.toolbarGroup.root}>
-          <FlowButton style={styles.toolbarGroup.flatButton} label={this.props.flow} onTouchTap={this._onFlowTouch.bind(this)} />
+          <FlowButton label={this.props.flow} onTouchTap={this._onFlowTouch.bind(this)} style={styles.toolbarGroup.flatButton} />
           <ToolbarSeparator style={styles.toolbarGroup.separator} />
-          <AuthButton style={styles.toolbarGroup.flatButton} label={authLabel} onTouchTap={authTouch} />
-          <GithubButton style={styles.toolbarGroup.iconButton} repoUrl={this.context.repoUrl} />
+          <AuthButton label={authLabel} onTouchTap={authTouch} style={styles.toolbarGroup.flatButton} />
+          <GithubButton repoUrl={this.context.repoUrl} style={styles.toolbarGroup.iconButton} />
         </ToolbarGroup>
       </Toolbar>
     );
@@ -90,19 +94,19 @@ TopBar.contextTypes = {
   loggedIn: React.PropTypes.bool.isRequired,
   muiTheme: React.PropTypes.object,
   repoUrl: React.PropTypes.string.isRequired,
-  tag: React.PropTypes.string.isRequired
+  tag: React.PropTypes.string.isRequired,
 };
 
 TopBar.propTypes = {
   flow: React.PropTypes.string,
   itemCount: React.PropTypes.number,
   style: React.PropTypes.object,
-  updateFlow: React.PropTypes.func
+  updateFlow: React.PropTypes.func,
 };
 
 TopBar.defaultProps = {
   itemCount: 0,
-  style: {}
+  style: {},
 };
 
 export default TopBar;

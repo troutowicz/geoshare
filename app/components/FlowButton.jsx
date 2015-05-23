@@ -8,7 +8,7 @@ class FlowButton extends React.Component {
     const theme = this.context.muiTheme.component.flatButton;
 
     return {
-      hoverColor: theme.hoverColor
+      hoverColor: theme.hoverColor,
     };
   }
 
@@ -25,18 +25,18 @@ class FlowButton extends React.Component {
 }
 
 FlowButton.contextTypes = {
-  muiTheme: React.PropTypes.object
+  muiTheme: React.PropTypes.object,
 };
 
 FlowButton.propTypes = {
   label: React.PropTypes.string,
   onTouchTap: React.PropTypes.func,
-  style: React.PropTypes.object
+  style: React.PropTypes.object,
 };
 
 FlowButton.defaultProps = {
   label: 'Pause',
-  style: {}
+  style: {},
 };
 
 export default FlowButton;

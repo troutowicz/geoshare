@@ -14,9 +14,9 @@ describe('ListItem component', function () {
   it('should embed children elements', function () {
     const component = TestUtils.renderIntoDocument(
       <ListItem
+        description='foo'
         icon='foo'
         title='foo'
-        description='foo'
       />
     );
     const listItem = TestUtils.findRenderedComponentWithType(component, ListItem);

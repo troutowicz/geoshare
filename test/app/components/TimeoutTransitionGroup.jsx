@@ -14,21 +14,21 @@ describe('TimeoutTransitionGroup component', function () {
       enter: {
         default: {
           opacity: '0.01',
-          transition: 'opacity .3s ease-in'
+          transition: 'opacity .3s ease-in',
         },
         active: {
-          opacity: '1'
-        }
+          opacity: '1',
+        },
       },
       leave: {
         default: {
           opacity: '1',
-          transition: 'opacity .3s ease-in'
+          transition: 'opacity .3s ease-in',
         },
         active: {
-          opacity: '0.01'
-        }
-      }
+          opacity: '0.01',
+        },
+      },
     };
 
     class Component extends React.Component {
@@ -41,7 +41,7 @@ describe('TimeoutTransitionGroup component', function () {
       componentDidMount() {
         this.setState({
           mounted: true,
-          removeChild: false
+          removeChild: false,
         });
       }
 
@@ -69,6 +69,12 @@ describe('TimeoutTransitionGroup component', function () {
         );
       }
     }
+
+    Component.propTypes = {
+      enterTimeout: React.PropTypes.number,
+      leaveTimeout: React.PropTypes.number,
+      style: React.PropTypes.object,
+    };
 
     this.Component = Component;
   });

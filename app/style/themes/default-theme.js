@@ -5,13 +5,13 @@ import colorManipulator from 'material-ui/lib/utils/color-manipulator';
 import spacing from 'material-ui/lib/styles/spacing';
 
 export default {
-  spacing: spacing,
+  spacing,
   contentFontFamily: 'Roboto, sans-serif',
   getPalette() {
     return {
       textColor: colors.red200,
       canvasColor: colors.red50,
-      borderColor: colors.red100
+      borderColor: colors.red100,
     };
   },
   getComponentThemes(palette) {
@@ -19,30 +19,30 @@ export default {
       flatButton: {
         color: palette.canvasColor,
         hoverColor: colorManipulator.fade(palette.textColor, 0.2),
-        textColor: palette.textColor
+        textColor: palette.textColor,
       },
       githubButton: {
         color: 'rgba(0, 0, 0, .40)',
         hoverColor: colors.fullBlack,
-        rippleColor: colorManipulator.fade(palette.textColor, 0.8)
+        rippleColor: colorManipulator.fade(palette.textColor, 0.8),
       },
       toolbar: {
         backgroundColor: palette.canvasColor,
         borderColor: palette.borderColor,
         separatorColor: palette.borderColor,
-        textColor: palette.textColor
+        textColor: palette.textColor,
       },
       title: {
         color: palette.textColor,
-        hoverColor: colors.red300
+        hoverColor: colors.red300,
       },
       listItem: {
         borderColor: '#EBEBEB',
         color: colorManipulator.fade('rgba(0, 0, 0, .035)', 0),
-        hoverColor: 'rgba(0, 0, 0, .035)'
-      }
+        hoverColor: 'rgba(0, 0, 0, .035)',
+      },
     };
 
     return obj;
-  }
+  },
 };

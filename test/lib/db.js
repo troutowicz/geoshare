@@ -11,9 +11,10 @@ describe('db lib', function () {
         sismember() {},
         hgetall() {},
         hmset() {},
-        sadd() {}
+        sadd() {},
       };
 
+      /* eslint-disable */
       this.data = {
         user: {
           id: 1,
@@ -21,7 +22,7 @@ describe('db lib', function () {
           full_name: 'Tim Routowicz',
           profile_picture: 'localhost/me.png',
         },
-        access_token: '12345'
+        access_token: '12345',
       };
 
       this.testUser = {
@@ -29,20 +30,22 @@ describe('db lib', function () {
         username: 'troutowicz',
         full_name: 'Tim Routowicz',
         profile_picture: 'localhost/me.png',
-        access_token: '12345'
+        access_token: '12345',
       };
+      /* eslint-enable */
     });
 
     it('should return user object when user found in db', function (done) {
       const client = {
         sismember() {},
-        hgetall() {}
+        hgetall() {},
       };
 
       sinon.stub(client, 'sismember').yields(null, true);
       sinon.stub(client, 'hgetall').yields(null, this.testUser);
 
       db.addUser(client, this.data, (err, user) => {
+        assert.isNull(err);
         assert.deepEqual(this.testUser, user);
 
         done();
@@ -53,7 +56,7 @@ describe('db lib', function () {
       const client = {
         sismember() {},
         hmset() {},
-        sadd() {}
+        sadd() {},
       };
 
       sinon.stub(client, 'sismember').yields(null, false);
@@ -61,6 +64,7 @@ describe('db lib', function () {
       sinon.stub(client, 'sadd').returns(true);
 
       db.addUser(client, this.data, (err, user) => {
+        assert.isNull(err);
         assert.deepEqual(this.testUser, user);
 
         done();
@@ -73,7 +77,7 @@ describe('db lib', function () {
       const token = '12345';
       const client = {
         del() {},
-        srem() {}
+        srem() {},
       };
 
       sinon.stub(client, 'del').yields(null);
@@ -90,12 +94,13 @@ describe('db lib', function () {
   describe('getTokens()', function () {
     it('should return tokens object', function (done) {
       const client = {
-        smembers() {}
+        smembers() {},
       };
 
       sinon.stub(client, 'smembers').yields(null, {});
 
       db.getTokens(client, (err, tokens) => {
+        assert.isNull(err);
         assert.deepEqual({}, tokens);
 
         done();

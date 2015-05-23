@@ -16,19 +16,23 @@ describe('List component', function () {
       {
         id: 1,
         user: {
+          /* eslint-disable */
           profile_picture: 'foo',
           full_name: 'foo',
-          username: 'foo'
-        }
+          /* eslint-enable */
+          username: 'foo',
+        },
       },
       {
         id: 2,
         user: {
+          /* eslint-disable */
           profile_picture: 'foo',
           full_name: 'foo',
-          username: 'foo'
-        }
-      }
+          /* eslint-enable */
+          username: 'foo',
+        },
+      },
     ];
 
     const component = TestUtils.renderIntoDocument(
