@@ -12,6 +12,7 @@ There is default configuration to simplify development. The config file is locat
 geoshare has a dev environment and any contributions are welcome! The dev environment uses two webservers, the webpack dev server (hot reloading) and the dev app.
 
 ```sh
+npm run build-mui
 npm run dev-server
 npm run dev
 ```
@@ -20,6 +21,7 @@ npm run dev
 Make sure to set all instagram related config options. Read more about this setup [here](https://instagram.com/developer/realtime/).
 
 ```sh
+npm run build-mui
 npm run build
 npm run prod
 ```

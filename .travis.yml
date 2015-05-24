@@ -1,9 +1,7 @@
 language: node_js
 
 before_script:
-  - cd node_modules/material-ui
-  - npm run build
-  - cd ../../
+  - npm run build-mui
 
 node_js:
   - "iojs"
