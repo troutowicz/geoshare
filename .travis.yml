@@ -1,8 +1,5 @@
 language: node_js
 
-before_script:
-  - npm run build-mui
-
 node_js:
   - "iojs"
   - "iojs-v1.5.1"
