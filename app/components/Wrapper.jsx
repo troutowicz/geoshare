@@ -24,7 +24,14 @@ class Wrapper extends React.Component {
   }
 
   componentWillMount() {
-    alt.bootstrap(JSON.stringify(this.props.initData.state));
+    alt.bootstrap(JSON.stringify(
+      {
+        AppStore: Object.assign(
+          AppStore.getState(),
+          this.props.initData.state.AppStore
+        ),
+      },
+    ));
 
     // force state update this render cycle
     this.setState(AppStore.getState());
