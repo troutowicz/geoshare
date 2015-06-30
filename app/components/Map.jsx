@@ -44,12 +44,12 @@ Map.propTypes = {
 };
 
 Map.defaultProps = {
-  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+  attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   center: [0, 0],
   maxZoom: 16,
   minZoom: 3,
   style: {},
-  url: 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
+  url: 'http://openmapsurfer.uni-hd.de/tiles/roadsg/x={x}&y={y}&z={z}',
   zoom: 3,
 };
 
