@@ -1,9 +1,22 @@
-'use strict';
-
-import React from 'react';
+import stampit from 'react-stampit';
 import IconButton from 'material-ui/lib/icon-button';
 
-class GithubButton extends React.Component {
+export default React => stampit(React, {
+  displayName: 'GithubButton',
+
+  contextTypes: {
+    muiTheme: React.PropTypes.object,
+  },
+
+  propTypes: {
+    repoUrl: React.PropTypes.string,
+    style: React.PropTypes.object,
+  },
+
+  defaultProps: {
+    style: {},
+  },
+
   _getStyle() {
     const theme = this.context.muiTheme.component.githubButton;
 
@@ -14,7 +27,7 @@ class GithubButton extends React.Component {
         iconHoverColor: theme.hoverColor,
       },
     };
-  }
+  },
 
   render() {
     const styles = this._getStyle();
@@ -29,20 +42,5 @@ class GithubButton extends React.Component {
         style={this.props.style}
         touchRippleColor={styles.rippleColor} />
     );
-  }
-}
-
-GithubButton.contextTypes = {
-  muiTheme: React.PropTypes.object,
-};
-
-GithubButton.propTypes = {
-  repoUrl: React.PropTypes.string,
-  style: React.PropTypes.object,
-};
-
-GithubButton.defaultProps = {
-  style: {},
-};
-
-export default GithubButton;
+  },
+});

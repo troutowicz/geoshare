@@ -1,5 +1,5 @@
-'use strict';
+import server from '../server';
 
-require('../server')({
+server({
   testData: true,
 });

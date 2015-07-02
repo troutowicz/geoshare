@@ -1,5 +1,3 @@
-'use strict';
-
 import rewire from 'rewire';
 import sinon from 'sinon';
 import { assert } from 'chai';

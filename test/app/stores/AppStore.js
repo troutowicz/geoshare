@@ -1,19 +1,17 @@
-'use strict';
-
 import AppStore from '../../../app/stores/AppStore';
 import { assert } from 'chai';
 
 describe('AppStore', function () {
   before(function () {
-    this.UnwrappedStore = AppStore[Object.getOwnPropertySymbols(AppStore)[2]];
+    this.UnwrappedStore = AppStore.StoreModel;
     this.defaultState = AppStore.getState();
   });
 
   afterEach(function () {
-    this.UnwrappedStore.newImageData = this.defaultState.newImageData;
-    this.UnwrappedStore.imageData = this.defaultState.imageData;
-    this.UnwrappedStore.focusMarker = this.defaultState.focusMarker;
-    this.UnwrappedStore.flow = this.defaultState.flow;
+    this.UnwrappedStore.state.newImageData = this.defaultState.newImageData;
+    this.UnwrappedStore.state.imageData = this.defaultState.imageData;
+    this.UnwrappedStore.state.focusMarker = this.defaultState.focusMarker;
+    this.UnwrappedStore.state.flow = this.defaultState.flow;
   });
 
   describe('onUpdateInstaData()', function () {

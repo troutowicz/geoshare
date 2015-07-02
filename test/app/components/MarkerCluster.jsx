@@ -1,12 +1,12 @@
-'use strict';
-
 import React from 'react/addons';
 import { assert } from 'chai';
 
-import MarkerCluster from '../../../app/components/MarkerCluster';
-import MyMap from '../../../app/components/Map';
+import markerClusterFactory from '../../../app/components/MarkerCluster';
+import mapFactory from '../../../app/components/Map';
 // import { Map } from 'react-leaflet';
 
+const MarkerCluster = markerClusterFactory(React);
+const MyMap = mapFactory(React);
 const TestUtils = React.addons.TestUtils;
 
 describe('MarkerCluster component', function () {

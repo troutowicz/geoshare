@@ -1,49 +1,51 @@
-'use strict';
-
 import alt from '../alt';
 import AppActions from '../actions/AppActions';
 
-class AppStore {
-  constructor() {
-    this.bindActions(AppActions);
+export default alt.createStore({
+  state: {
+    newImageData: [],
+    imageData: [],
+    markers: {},
+    focusMarker: {},
+    flow: 'Pause',
+    timeout: false,
+  },
 
-    this.newImageData = [];
-    this.imageData = [];
-    this.markers = {};
-    this.focusMarker = {};
-    this.flow = 'Pause';
-    this.timeout = false;
-  }
+  bindListeners: {
+    onUpdateInstaData: AppActions.updateInstaData,
+    onUpdateMarkers: AppActions.updateMarkers,
+    onUpdateFocusedMarker: AppActions.updateFocusedMarker,
+    onUpdateFlowSuccess: AppActions.updateFlowSuccess,
+    onUpdateTimeout: AppActions.updateTimeout,
+  },
 
   onUpdateInstaData(data) {
-    let imageData = data.concat(this.imageData);
+    let imageData = data.concat(this.state.imageData);
 
     // limit imageData (used in list) to last 100
     while (imageData.length > 100) {
       imageData.pop();
     }
 
-    this.focusMarker = {};
-    this.newImageData = data;
-    this.imageData = imageData;
-  }
+    this.state.focusMarker = {};
+    this.state.newImageData = data;
+    this.state.imageData = imageData;
+  },
 
   onUpdateMarkers(markers) {
-    this.newImageData = [];
-    this.markers = markers;
-  }
+    this.state.newImageData = [];
+    this.state.markers = markers;
+  },
 
   onUpdateFocusedMarker(marker) {
-    this.focusMarker = marker;
-  }
+    this.state.focusMarker = marker;
+  },
 
   onUpdateFlowSuccess(newFlow) {
-    this.flow = newFlow;
-  }
+    this.state.flow = newFlow;
+  },
 
   onUpdateTimeout(isActive) {
-    this.timeout = isActive;
-  }
-}
-
-export default alt.createStore(AppStore, 'AppStore');
+    this.state.timeout = isActive;
+  },
+}, 'AppStore');

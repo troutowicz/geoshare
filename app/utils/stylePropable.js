@@ -1,5 +1,3 @@
-'use strict';
-
 import autoPrefix from 'material-ui/lib/styles/auto-prefix';
 import extend from 'material-ui/lib/utils/extend';
 

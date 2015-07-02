@@ -1,5 +1,3 @@
-'use strict';
-
 import config from 'config';
 import Hapi from 'hapi';
 import Redis from 'redis';

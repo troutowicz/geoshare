@@ -1,10 +1,9 @@
-'use strict';
-
 import React from 'react/addons';
 import { assert } from 'chai';
 
-import MarkerPopup from '../../../app/components/MarkerPopup';
+import markerPopupFactory from '../../../app/components/MarkerPopup';
 
+const MarkerPopup = markerPopupFactory(React);
 const TestUtils = React.addons.TestUtils;
 
 describe('MarkerPopup component', function () {

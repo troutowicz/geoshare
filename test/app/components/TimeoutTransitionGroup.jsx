@@ -1,11 +1,10 @@
-'use strict';
-
 import React from 'react/addons';
 import sinon from 'sinon';
 import { assert } from 'chai';
 
-import ReactCSSTransitionGroup from '../../../app/components/TimeoutTransitionGroup';
+import reactCSSTransitionGroupFactory from '../../../app/components/TimeoutTransitionGroup';
 
+const ReactCSSTransitionGroup = reactCSSTransitionGroupFactory(React);
 const TestUtils = React.addons.TestUtils;
 
 describe('TimeoutTransitionGroup component', function () {

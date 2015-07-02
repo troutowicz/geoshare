@@ -1,16 +1,31 @@
-'use strict';
-
-import React from 'react';
+import stampit from 'react-stampit';
 import FlatButton from 'material-ui/lib/flat-button';
 
-class AuthButton extends React.Component {
+export default React => stampit(React, {
+  displayName: 'AuthButton',
+
+  contextTypes: {
+    muiTheme: React.PropTypes.object,
+  },
+
+  propTypes: {
+    label: React.PropTypes.string,
+    onTouchTap: React.PropTypes.func,
+    style: React.PropTypes.object,
+  },
+
+  defaultProps: {
+    label: 'Login',
+    style: {},
+  },
+
   _getStyles() {
     const theme = this.context.muiTheme.component.flatButton;
 
     return {
       hoverColor: theme.hoverColor,
     };
-  }
+  },
 
   render() {
     const styles = this._getStyles.call(this);
@@ -21,22 +36,5 @@ class AuthButton extends React.Component {
         hoverColor={styles.hoverColor}
       />
     );
-  }
-}
-
-AuthButton.contextTypes = {
-  muiTheme: React.PropTypes.object,
-};
-
-AuthButton.propTypes = {
-  label: React.PropTypes.string,
-  onTouchTap: React.PropTypes.func,
-  style: React.PropTypes.object,
-};
-
-AuthButton.defaultProps = {
-  label: 'Login',
-  style: {},
-};
-
-export default AuthButton;
+  },
+});

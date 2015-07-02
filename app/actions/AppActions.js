@@ -1,5 +1,3 @@
-'use strict';
-
 import alt from '../alt';
 import io from 'socket.io-client';
 
@@ -8,16 +6,28 @@ if (typeof window !== 'undefined') {
   socket = io();
 }
 
-class AppActions {
-  constructor() {
-    this.generateActions(
-      'updateFocusedMarker',
-      'updateFlowSuccess',
-      'updateInstaData',
-      'updateMarkers',
-      'updateTimeout'
-    );
-  }
+export default alt.createActions({
+  displayName: 'AppActions',
+
+  updateFocusedMarker(data) {
+    this.dispatch(data);
+  },
+
+  updateFlowSuccess(data) {
+    this.dispatch(data);
+  },
+
+  updateInstaData(data) {
+    this.dispatch(data);
+  },
+
+  updateMarkers(data) {
+    this.dispatch(data);
+  },
+
+  updateTimeout(data) {
+    this.dispatch(data);
+  },
 
   updateFlow(curFlow) {
     if (curFlow === 'Pause') {
@@ -25,7 +35,5 @@ class AppActions {
     } else {
       socket.emit('flow:start', () => this.actions.updateFlowSuccess('Pause'));
     }
-  }
-}
-
-export default alt.createActions(AppActions);
+  },
+});

@@ -1,8 +1,14 @@
-'use strict';
+import stampit from 'react-stampit';
 
-import React from 'react';
+export default React => stampit(React, {
+  displayName: 'MarkerPopup',
 
-class MarkerPopup extends React.Component {
+  propTypes: {
+    caption: React.PropTypes.string,
+    imgUrl: React.PropTypes.string,
+    profileUrl: React.PropTypes.string,
+  },
+
   _getStyles() {
     return {
       caption: {
@@ -13,7 +19,7 @@ class MarkerPopup extends React.Component {
         margin: 'auto',
       },
     };
-  }
+  },
 
   render() {
     const styles = this._getStyles();
@@ -27,13 +33,5 @@ class MarkerPopup extends React.Component {
         <div style={styles.caption}>{this.props.caption}</div>
       </div>
     );
-  }
-}
-
-MarkerPopup.propTypes = {
-  caption: React.PropTypes.string,
-  imgUrl: React.PropTypes.string,
-  profileUrl: React.PropTypes.string,
-};
-
-export default MarkerPopup;
+  },
+});

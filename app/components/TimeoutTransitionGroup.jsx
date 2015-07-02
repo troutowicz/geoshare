@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * The CSSTransitionGroup component uses the 'transitionend' event, which
  * browsers will not send for any number of reasons, including the
@@ -16,8 +14,7 @@
  * addons and under the Apache 2.0 License.
  */
 
-import React from 'react/addons';
-const ReactTransitionGroup = React.addons.TransitionGroup;
+import stampit from 'react-stampit';
 
 const TICK = 17;
 
@@ -97,15 +94,7 @@ function removeStyle(element, style) {
   return element;
 }
 
-class TimeoutTransitionGroupChild extends React.Component {
-  constructor() {
-    super();
-
-    this._transition = this._transition.bind(this);
-    this._queueStyle = this._queueStyle.bind(this);
-    this._flushClassNameQueue = this._flushClassNameQueue.bind(this);
-  }
-
+const timeoutTransitionGroupChildFactory = React => stampit(React, {
   _transition(animationType, finishCallback) {
     let node = React.findDOMNode(this);
 
@@ -133,15 +122,15 @@ class TimeoutTransitionGroupChild extends React.Component {
 
     // Need to do this to actually trigger a transition.
     this._queueStyle(this.props.style[animationType].active);
-  }
+  },
 
   _queueStyle(style) {
     this.styleQueue.push(style);
 
     if (!this.timeout) {
-      this.timeout = setTimeout(this._flushClassNameQueue, TICK);
+      this.timeout = setTimeout(this._flushClassNameQueue.bind(this), TICK);
     }
-  }
+  },
 
   _flushClassNameQueue() {
     this.styleQueue.forEach((style) => {
@@ -150,11 +139,11 @@ class TimeoutTransitionGroupChild extends React.Component {
 
     this.styleQueue.length = 0;
     this.timeout = null;
-  }
+  },
 
   componentWillMount() {
     this.styleQueue = [];
-  }
+  },
 
   componentWillUnmount() {
     if (this.timeout) {
@@ -164,7 +153,7 @@ class TimeoutTransitionGroupChild extends React.Component {
     if (this.animationTimeout) {
       clearTimeout(this.animationTimeout);
     }
-  }
+  },
 
   componentWillEnter(done) {
     if (this.props.enter) {
@@ -172,7 +161,7 @@ class TimeoutTransitionGroupChild extends React.Component {
     } else {
       done();
     }
-  }
+  },
 
   componentWillLeave(done) {
     if (this.props.leave) {
@@ -180,59 +169,58 @@ class TimeoutTransitionGroupChild extends React.Component {
     } else {
       done();
     }
-  }
+  },
 
   render() {
     return React.Children.only(this.props.children);
-  }
-}
+  },
+});
 
-class TimeoutTransitionGroup extends React.Component {
-  constructor() {
-    super();
+export default React => {
+  const ReactTransitionGroup = React.addons.TransitionGroup;
+  const TimeoutTransitionGroupChild = timeoutTransitionGroupChildFactory(React);
 
-    this._wrapChild = this._wrapChild.bind(this);
-  }
+  return stampit(React, {
+    displayName: 'ReactCSSTransitionGroup',
 
-  _wrapChild(child) {
-    return (
-      <TimeoutTransitionGroupChild
-        enter={this.props.transitionEnter}
-        enterTimeout={this.props.enterTimeout}
-        leave={this.props.transitionLeave}
-        leaveTimeout={this.props.leaveTimeout}
-        style={this.props.style}
-      >
-        {child}
-      </TimeoutTransitionGroupChild>
-    );
-  }
+    propTypes: {
+      enterTimeout: React.PropTypes.number.isRequired,
+      leaveTimeout: React.PropTypes.number.isRequired,
+      style: React.PropTypes.object.isRequired,
+      transitionEnter: React.PropTypes.bool,
+      transitionLeave: React.PropTypes.bool,
+    },
 
-  render() {
-    /* eslint-disable */
-    const {style, ...props} = this.props;
-    /* eslint-enable */
+    defaultProps: {
+      transitionEnter: true,
+      transitionLeave: true,
+    },
 
-    return (
-      <ReactTransitionGroup
-        {...props}
-        childFactory={this._wrapChild}
-      />
-    );
-  }
-}
+    _wrapChild(child) {
+      return (
+        <TimeoutTransitionGroupChild
+          enter={this.props.transitionEnter}
+          enterTimeout={this.props.enterTimeout}
+          leave={this.props.transitionLeave}
+          leaveTimeout={this.props.leaveTimeout}
+          style={this.props.style}
+        >
+          {child}
+        </TimeoutTransitionGroupChild>
+      );
+    },
 
-TimeoutTransitionGroup.propTypes = {
-  enterTimeout: React.PropTypes.number.isRequired,
-  leaveTimeout: React.PropTypes.number.isRequired,
-  style: React.PropTypes.object.isRequired,
-  transitionEnter: React.PropTypes.bool,
-  transitionLeave: React.PropTypes.bool,
+    render() {
+      /* eslint-disable */
+      const {style, ...props} = this.props;
+      /* eslint-enable */
+
+      return (
+        <ReactTransitionGroup
+          {...props}
+          childFactory={this._wrapChild.bind(this)}
+        />
+      );
+    },
+  });
 };
-
-TimeoutTransitionGroup.defaultProps = {
-  transitionEnter: true,
-  transitionLeave: true,
-};
-
-export default TimeoutTransitionGroup;

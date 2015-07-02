@@ -1,15 +1,19 @@
-'use strict';
-
-import React from 'react';
+import stampit from 'react-stampit';
 import transitions from 'material-ui/lib/styles/transitions';
 import { ToolbarTitle } from 'material-ui/lib/toolbar';
 
-class Title extends React.Component {
-  constructor(props) {
-    super(props);
+export default React => stampit(React, {
+  displayName: 'Title',
 
-    this.state = {hovered: false};
-  }
+  state: { hovered: false },
+
+  contextTypes: {
+    muiTheme: React.PropTypes.object,
+  },
+
+  propTypes: {
+    text: React.PropTypes.string,
+  },
 
   _getStyle() {
     const theme = this.context.muiTheme.component.title;
@@ -20,15 +24,15 @@ class Title extends React.Component {
       paddingRight: '0',
       transition: transitions.easeOut(),
     };
-  }
+  },
 
   _handleMouseOver() {
     this.setState({hovered: true});
-  }
+  },
 
   _handleMouseOut() {
     this.setState({hovered: false});
-  }
+  },
 
   render() {
     const style = this._getStyle.call(this);
@@ -41,15 +45,5 @@ class Title extends React.Component {
         text='GeoShare'
       />
     );
-  }
-}
-
-Title.contextTypes = {
-  muiTheme: React.PropTypes.object,
-};
-
-Title.propTypes = {
-  text: React.PropTypes.string,
-};
-
-export default Title;
+  },
+});
