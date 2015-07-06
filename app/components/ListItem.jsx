@@ -1,87 +1,57 @@
 'use strict';
 
 import React from 'react';
-import Paper from 'material-ui/lib/paper';
-import transitions from 'material-ui/lib/styles/transitions';
 import typography from 'material-ui/lib/styles/typography';
+import {
+  ListDivider,
+  ListItem,
+} from 'material-ui';
+import ListItemAvatar from './ListItemAvatar';
 import { mergeAndPrefix } from '../utils/stylePropable';
 
-class ListItem extends React.Component {
-  constructor(props) {
-    super(props);
+export default class extends React.Component {
+  static contextTypes = {
+    muiTheme: React.PropTypes.object,
+  };
 
-    this.state = {hovered: false};
-  }
+  static propTypes = {
+    description: React.PropTypes.string,
+    icon: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+    title: React.PropTypes.string,
+  };
+
+  static defaultProps = {
+    description: '',
+    title: '',
+  };
 
   _getStyles() {
     const theme = this.context.muiTheme.component.listItem;
 
-    let backgroundColor = theme.color;
-    if (this.state.hovered) {
-      backgroundColor = this.props.hoverColor || theme.hoverColor;
-    }
-
     return {
-      root: {
-        backgroundColor,
-        cursor: 'pointer',
-        height: '72px',
-        transition: transitions.easeOut(),
+      title: {
+        fontSize: '0.8em',
+        fontWeight: typography.fontWeightMedium,
+        color: theme.color,
       },
-      icon: {
-        root: {
-          position: 'absolute',
-          marginLeft: '16px',
-          marginTop: '19px',
-        },
-        paper: {
-          overflow: 'hidden',
-          height: '40px',
-        },
-        image: {
-          width: '40px',
-        },
+      description: {
+        marginTop: '-4px',
+        fontSize: '0.75em',
+        color: theme.color,
       },
-      content: {
-        root: {
-          paddingLeft: '72px',
-          paddingRight: '16px',
-          whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-        },
-        title: {
-          paddingTop: '20px',
-          fontSize: '1.2em',
-          fontWeight: typography.fontWeightMedium,
-        },
-        description: {
-          marginTop: '-4px',
-          fontSize: '0.75em',
-        },
+      divider: {
+        backgroundColor: theme.borderColor,
+        paddingTop: '0.1px',
       },
-      borderBottom: {
-        position: 'absolute',
-        marginTop: '16px',
-        right: '0',
-        left: '72px',
-        borderBottom: `1px solid ${theme.borderColor}`,
+      overflow: {
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        width: '190px',
+        display: 'inline-block',
+        whiteSpace: 'nowrap',
       },
     };
-  }
-
-  _handleMouseOver(e) {
-    this.setState({hovered: true});
-    if (this.props.onMouseOver) {
-      this.props.onMouseOver(e);
-    }
-  }
-
-  _handleMouseOut(e) {
-    this.setState({hovered: false});
-    if (this.props.onMouseOut) {
-      this.props.onMouseOut(e);
-    }
   }
 
   render() {
@@ -90,52 +60,25 @@ class ListItem extends React.Component {
     const {
       description,
       icon,
-      onMouseOut,
-      onMouseOver,
+      onClick,
       title,
       ...other
     } = this.props;
     /* eslint-enable */
 
     return (
-      <li
-        {...other}
-        onMouseOut={this._handleMouseOut.bind(this)}
-        onMouseOver={this._handleMouseOver.bind(this)}
-        style={mergeAndPrefix(styles.root)}
-      >
-        <div className='icon' style={styles.icon.root}>
-          <Paper circle={true} style={styles.icon.paper} zDepth={0} >
-            <img src={icon} style={styles.icon.image} />
-          </Paper>
-        </div>
-        <div className='content' style={styles.content.root}>
-          <div dangerouslySetInnerHTML={{__html: title}} style={styles.content.title} ></div>
-          <div dangerouslySetInnerHTML={{__html: description}} style={styles.content.description} ></div>
-        </div>
-        <div className='border-bottom' style={styles.borderBottom} />
-      </li>
+      <div onClick={onClick}>
+        <ListItem
+          {...other}
+          leftAvatar={<ListItemAvatar className='icon' src={icon} />}
+          secondaryText={
+            <div className='content' dangerouslySetInnerHTML={{__html: description}} style={mergeAndPrefix(styles.overflow, styles.description)} ></div>
+          }
+        >
+          <span dangerouslySetInnerHTML={{__html: title}} style={mergeAndPrefix(styles.overflow, styles.title)}></span>
+        </ListItem>
+        <ListDivider className='border-bottom' inset={true} style={styles.divider} />
+      </div>
     );
   }
 }
-
-ListItem.contextTypes = {
-  muiTheme: React.PropTypes.object,
-};
-
-ListItem.propTypes = {
-  description: React.PropTypes.string,
-  hoverColor: React.PropTypes.string,
-  icon: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-  onMouseOut: React.PropTypes.func,
-  onMouseOver: React.PropTypes.func,
-  title: React.PropTypes.string,
-};
-
-ListItem.defaultProps = {
-  description: '',
-  title: '',
-};
-
-export default ListItem;

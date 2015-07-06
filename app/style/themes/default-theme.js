@@ -37,9 +37,8 @@ export default {
         hoverColor: colors.red300,
       },
       listItem: {
-        borderColor: '#EBEBEB',
-        color: colorManipulator.fade('rgba(0, 0, 0, .035)', 0),
-        hoverColor: 'rgba(0, 0, 0, .035)',
+        borderColor: colorManipulator.fade(palette.borderColor, 0.3),
+        color: colors.fullBlack,
       },
     };
 

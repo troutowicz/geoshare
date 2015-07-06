@@ -11,10 +11,11 @@
     "dev-server": "webpack --config config/webpack/prerender.config.js & webpack-dev-server --config config/webpack/devServer.config.js --progress --colors --hot --inline",
     "dev": "babel-node --ignore 'node_modules','build','app' config/serverDev",
     "lint": "eslint --ext .js,.jsx app/ config/ lib/ test/ server.js",
+    "postinstall": "babel --stage 1 ./node_modules/material-ui/src --out-dir ./node_modules/material-ui/lib",
     "prod": "babel-node --ignore 'node_modules','build','app' config/serverProd",
     "test": "npm run lint && npm run test-jsx && npm run test-js",
     "test-js": "mocha ./test/lib ./test/app/actions ./test/app/stores --compilers js:babel/register",
-    "test-jsx": "mochify node_modules/babel/polyfill ./test/app/components/* --reporter spec --transform [ babelify --stage 1 --ignore 'node_modules'] --extension .jsx"
+    "test-jsx": "mochify node_modules/babel/polyfill ./test/app/components/* --reporter spec --transform [ babelify --stage 0 --ignore 'node_modules'] --extension .jsx"
   },
   "repository": {
     "type": "git",
@@ -46,7 +47,7 @@
     "leaflet.markercluster": "Leaflet/Leaflet.markercluster#v0.4.0-hotfix.1",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
-    "material-ui": "0.9.0",
+    "material-ui": "ababol/material-ui.git",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
     "react-leaflet": "^0.6.2",

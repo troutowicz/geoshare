@@ -4,8 +4,19 @@ import React from 'react';
 import ListItem from './ListItem';
 import ReactCSSTransitionGroup from './TimeoutTransitionGroup';
 import { mergeAndPrefix } from '../utils/stylePropable';
+import { List } from 'material-ui';
 
-class List extends React.Component {
+export default class extends React.Component {
+  static propTypes = {
+    itemData: React.PropTypes.array,
+    onClick: React.PropTypes.func,
+    style: React.PropTypes.object,
+  };
+
+  static defaultProps = {
+    style: {},
+  };
+
   _getStyles() {
     return {
       root: {
@@ -40,7 +51,7 @@ class List extends React.Component {
     let styles = this._getStyles();
 
     return (
-      <ul style={mergeAndPrefix(styles.root, this.props.style)}>
+      <List style={mergeAndPrefix(styles.root, this.props.style)}>
         <ReactCSSTransitionGroup
           enterTimeout={1000}
           leaveTimeout={0}
@@ -58,19 +69,7 @@ class List extends React.Component {
             );
           })}
         </ReactCSSTransitionGroup>
-      </ul>
+      </List>
     );
   }
 }
-
-List.propTypes = {
-  itemData: React.PropTypes.array,
-  onClick: React.PropTypes.func,
-  style: React.PropTypes.object,
-};
-
-List.defaultProps = {
-  style: {},
-};
-
-export default List;
