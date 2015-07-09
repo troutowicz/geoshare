@@ -64,7 +64,7 @@ export default class extends React.Component {
                 icon={obj.user.profile_picture}
                 key={obj.id}
                 onClick={this.props.onClick ? this.props.onClick.bind(null, obj) : undefined}
-                title={obj.user.full_name.trim() || '-'}
+                primaryText={obj.user.full_name.trim() || '-'}
               />
             );
           })}

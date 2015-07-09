@@ -18,19 +18,19 @@ export default class extends React.Component {
     description: React.PropTypes.string,
     icon: React.PropTypes.string,
     onClick: React.PropTypes.func,
-    title: React.PropTypes.string,
+    primaryText: React.PropTypes.string,
   };
 
   static defaultProps = {
     description: '',
-    title: '',
+    primaryText: '',
   };
 
   _getStyles() {
     const theme = this.context.muiTheme.component.listItem;
 
     return {
-      title: {
+      primaryText: {
         fontSize: '0.8em',
         fontWeight: typography.fontWeightMedium,
         color: theme.color,
@@ -60,8 +60,8 @@ export default class extends React.Component {
     const {
       description,
       icon,
+      primaryText,
       onClick,
-      title,
       ...other
     } = this.props;
     /* eslint-enable */
@@ -71,12 +71,13 @@ export default class extends React.Component {
         <ListItem
           {...other}
           leftAvatar={<ListItemAvatar className='icon' src={icon} />}
+          primaryText={
+            <div dangerouslySetInnerHTML={{__html: primaryText}} style={mergeAndPrefix(styles.overflow, styles.primaryText)}></div>
+          }
           secondaryText={
             <div className='content' dangerouslySetInnerHTML={{__html: description}} style={mergeAndPrefix(styles.overflow, styles.description)} ></div>
           }
-        >
-          <span dangerouslySetInnerHTML={{__html: title}} style={mergeAndPrefix(styles.overflow, styles.title)}></span>
-        </ListItem>
+        />
         <ListDivider className='border-bottom' inset={true} style={styles.divider} />
       </div>
     );
