@@ -15,7 +15,7 @@
     "prod": "babel-node --ignore 'node_modules','build','app' config/serverProd",
     "test": "npm run lint && npm run test-jsx && npm run test-js",
     "test-js": "mocha ./test/lib ./test/app/actions ./test/app/stores --compilers js:babel/register",
-    "test-jsx": "mochify node_modules/babel/polyfill ./test/app/components/* --reporter spec --transform [ babelify --stage 0 --ignore 'node_modules'] --extension .jsx"
+    "test-jsx": "mochify node_modules/babel/polyfill ./test/app/components/* --reporter spec --transform [ babelify --stage 1 --ignore 'node_modules'] --extension .jsx"
   },
   "repository": {
     "type": "git",

@@ -6,17 +6,7 @@ import ReactCSSTransitionGroup from './TimeoutTransitionGroup';
 import { mergeAndPrefix } from '../utils/stylePropable';
 import List from 'material-ui/lib/lists/list';
 
-export default class extends React.Component {
-  static propTypes = {
-    itemData: React.PropTypes.array,
-    onClick: React.PropTypes.func,
-    style: React.PropTypes.object,
-  };
-
-  static defaultProps = {
-    style: {},
-  };
-
+class SideList extends React.Component {
   _getStyles() {
     return {
       root: {
@@ -73,3 +63,15 @@ export default class extends React.Component {
     );
   }
 }
+
+SideList.propTypes = {
+  itemData: React.PropTypes.array,
+  onClick: React.PropTypes.func,
+  style: React.PropTypes.object,
+};
+
+SideList.defaultProps = {
+  style: {},
+};
+
+export default SideList;

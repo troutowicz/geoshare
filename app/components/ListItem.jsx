@@ -6,23 +6,7 @@ import { ListDivider, ListItem } from 'material-ui/lib/lists';
 import ListItemAvatar from './ListItemAvatar';
 import { mergeAndPrefix } from '../utils/stylePropable';
 
-export default class extends React.Component {
-  static contextTypes = {
-    muiTheme: React.PropTypes.object,
-  };
-
-  static propTypes = {
-    description: React.PropTypes.string,
-    icon: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    primaryText: React.PropTypes.string,
-  };
-
-  static defaultProps = {
-    description: '',
-    primaryText: '',
-  };
-
+class SideListItem extends React.Component {
   _getStyles() {
     const theme = this.context.muiTheme.component.listItem;
 
@@ -80,3 +64,21 @@ export default class extends React.Component {
     );
   }
 }
+
+SideListItem.contextTypes = {
+  muiTheme: React.PropTypes.object,
+};
+
+SideListItem.propTypes = {
+  description: React.PropTypes.string,
+  icon: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+  primaryText: React.PropTypes.string,
+};
+
+SideListItem.defaultProps = {
+  description: '',
+  primaryText: '',
+};
+
+export default SideListItem;
