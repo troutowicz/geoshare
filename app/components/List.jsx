@@ -4,7 +4,7 @@ import React from 'react';
 import ListItem from './ListItem';
 import ReactCSSTransitionGroup from './TimeoutTransitionGroup';
 import { mergeAndPrefix } from '../utils/stylePropable';
-import { List } from 'material-ui';
+import List from 'material-ui/lib/lists/list';
 
 export default class extends React.Component {
   static propTypes = {

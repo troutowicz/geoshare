@@ -2,10 +2,7 @@
 
 import React from 'react';
 import typography from 'material-ui/lib/styles/typography';
-import {
-  ListDivider,
-  ListItem,
-} from 'material-ui';
+import { ListDivider, ListItem } from 'material-ui/lib/lists';
 import ListItemAvatar from './ListItemAvatar';
 import { mergeAndPrefix } from '../utils/stylePropable';
 
