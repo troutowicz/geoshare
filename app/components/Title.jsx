@@ -2,7 +2,7 @@
 
 import React from 'react';
 import transitions from 'material-ui/lib/styles/transitions';
-import { ToolbarTitle } from 'material-ui/lib/toolbar';
+import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
 class Title extends React.Component {
   constructor(props) {
