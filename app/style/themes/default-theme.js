@@ -39,6 +39,7 @@ export default {
       listItem: {
         borderColor: colorManipulator.fade(palette.borderColor, 0.3),
         color: colors.fullBlack,
+        rippleColor: colorManipulator.fade(palette.textColor, 0.5),
       },
     };
 

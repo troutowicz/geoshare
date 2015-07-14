@@ -11,6 +11,7 @@ class SideListItem extends React.Component {
     const theme = this.context.muiTheme.component.listItem;
 
     return {
+      rippleColor: theme.rippleColor,
       primaryText: {
         fontSize: '0.8em',
         fontWeight: typography.fontWeightMedium,
@@ -51,6 +52,7 @@ class SideListItem extends React.Component {
       <div onClick={onClick}>
         <ListItem
           {...other}
+          focusRippleColor={styles.rippleColor}
           leftAvatar={<ListItemAvatar className='icon' src={icon} />}
           primaryText={
             <div dangerouslySetInnerHTML={{__html: primaryText}} style={mergeAndPrefix(styles.overflow, styles.primaryText)}></div>
@@ -58,6 +60,7 @@ class SideListItem extends React.Component {
           secondaryText={
             <div className='content' dangerouslySetInnerHTML={{__html: description}} style={mergeAndPrefix(styles.overflow, styles.description)} ></div>
           }
+          touchRippleColor={styles.rippleColor}
         />
         <ListDivider className='border-bottom' inset={true} style={styles.divider} />
       </div>
