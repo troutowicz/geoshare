@@ -1,30 +1,28 @@
 'use strict';
 
+import alt from '../../../app/alt';
+import AppActions from '../../../app/actions/AppActions';
 import AppStore from '../../../app/stores/AppStore';
 import { assert } from 'chai';
 
 describe('AppStore', function () {
   before(function () {
-    this.UnwrappedStore = AppStore[Object.getOwnPropertySymbols(AppStore)[2]];
     this.defaultState = AppStore.getState();
   });
 
   afterEach(function () {
-    this.UnwrappedStore.newImageData = this.defaultState.newImageData;
-    this.UnwrappedStore.imageData = this.defaultState.imageData;
-    this.UnwrappedStore.focusMarker = this.defaultState.focusMarker;
-    this.UnwrappedStore.flow = this.defaultState.flow;
+    alt.recycle();
   });
 
   describe('onUpdateInstaData()', function () {
     it('should update relevant app state', function () {
       const data = ['foo', 'bar'];
+      const action = AppActions.UPDATE_INSTA_DATA;
 
-      this.UnwrappedStore.onUpdateInstaData(data);
+      alt.dispatcher.dispatch({ action, data });
       assert.deepEqual(AppStore.getState().newImageData, data);
       assert.deepEqual(AppStore.getState().imageData, data);
       assert.deepEqual(AppStore.getState().focusMarker, {});
-
       assert.equal(AppStore.getState().flow, this.defaultState.flow);
     });
   });
@@ -32,10 +30,10 @@ describe('AppStore', function () {
   describe('onUpdateFocusedMarker()', function () {
     it('should update focusMarker state', function () {
       const data = 'foo';
+      const action = AppActions.UPDATE_FOCUSED_MARKER;
 
-      this.UnwrappedStore.onUpdateFocusedMarker(data);
+      alt.dispatcher.dispatch({ action, data });
       assert.equal(AppStore.getState().focusMarker, data);
-
       assert.deepEqual(AppStore.getState().newImageData, this.defaultState.newImageData);
       assert.deepEqual(AppStore.getState().imageData, this.defaultState.imageData);
       assert.equal(AppStore.getState().flow, this.defaultState.flow);
@@ -44,11 +42,11 @@ describe('AppStore', function () {
 
   describe('onUpdateFlowSuccess()', function () {
     it('should update flow state', function () {
-      const newFlow = 'Pause';
+      const data = 'Resume';
+      const action = AppActions.UPDATE_FLOW_SUCCESS;
 
-      this.UnwrappedStore.onUpdateFlowSuccess(newFlow);
-      assert.equal(AppStore.getState().flow, newFlow);
-
+      alt.dispatcher.dispatch({ action, data });
+      assert.equal(AppStore.getState().flow, data);
       assert.deepEqual(AppStore.getState().newImageData, this.defaultState.newImageData);
       assert.deepEqual(AppStore.getState().imageData, this.defaultState.imageData);
       assert.deepEqual(AppStore.getState().focusMarker, this.defaultState.focusMarker);
