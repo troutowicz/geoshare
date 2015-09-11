@@ -4,8 +4,9 @@ import React from 'react';
 import ListItem from './ListItem';
 import ReactCSSTransitionGroup from './TimeoutTransitionGroup';
 import { mergeAndPrefix } from '../utils/stylePropable';
+import List from 'material-ui/lib/lists/list';
 
-class List extends React.Component {
+class SideList extends React.Component {
   _getStyles() {
     return {
       root: {
@@ -40,7 +41,7 @@ class List extends React.Component {
     let styles = this._getStyles();
 
     return (
-      <ul style={mergeAndPrefix(styles.root, this.props.style)}>
+      <List style={mergeAndPrefix(styles.root, this.props.style)}>
         <ReactCSSTransitionGroup
           enterTimeout={1000}
           leaveTimeout={0}
@@ -53,24 +54,24 @@ class List extends React.Component {
                 icon={obj.user.profile_picture}
                 key={obj.id}
                 onClick={this.props.onClick ? this.props.onClick.bind(null, obj) : undefined}
-                title={obj.user.full_name.trim() || '-'}
+                primaryText={obj.user.full_name.trim() || '-'}
               />
             );
           })}
         </ReactCSSTransitionGroup>
-      </ul>
+      </List>
     );
   }
 }
 
-List.propTypes = {
+SideList.propTypes = {
   itemData: React.PropTypes.array,
   onClick: React.PropTypes.func,
   style: React.PropTypes.object,
 };
 
-List.defaultProps = {
+SideList.defaultProps = {
   style: {},
 };
 
-export default List;
+export default SideList;
